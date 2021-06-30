@@ -68,7 +68,8 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         setState(() {
           screenView = ImageUpload();
         });
-      } else if (drawerIndex == DrawerIndex.Help) {
+      }
+      /*else if (drawerIndex == DrawerIndex.Help) {
         setState(() {
           screenView = DashboardScreen();
         });
@@ -82,7 +83,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         });
       } else {
         //do in your way......
-      }
+      }*/
     }
   }
 }

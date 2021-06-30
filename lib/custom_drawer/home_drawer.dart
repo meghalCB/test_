@@ -46,7 +46,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
         isAssetsImage: true,
         imageName: 'assets/images/supportIcon.png',
       ),*/
-      DrawerList(
+      /*DrawerList(
         index: DrawerIndex.FeedBack,
         labelName: 'FeedBack',
         icon: Icon(Icons.help_outline_rounded),
@@ -60,7 +60,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
         index: DrawerIndex.Share,
         labelName: 'Rate the app',
         icon: Icon(Icons.share),
-      ),
+      ),*/
       DrawerList(
         index: DrawerIndex.About,
         labelName: 'About Us',
@@ -282,9 +282,9 @@ enum DrawerIndex {
   HOME,
   MYVehicle,
   Documents,
-  FeedBack,
+  /*FeedBack,
   Help,
-  Share,
+  Share,*/
   About,
   Invite,
   Testing,
