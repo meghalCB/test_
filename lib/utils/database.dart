@@ -37,6 +37,92 @@ class Database {
         .catchError((e) => print(e));
   }
 
+
+  static Future<void> addItemrepair({
+    String expensetype = 'Repair',
+    required String vehiclename,
+    required bool parttype,
+    required String km,
+    required String repairamt,
+    required String location,
+    required String partnamenotes,
+
+  }) async {
+    DocumentReference documentReferencer =
+    _mainCollection.doc(userUid).collection(expensetype).doc();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      "vehiclename": vehiclename,
+      "parttype": parttype,
+      "km": km,
+      "repairamt": repairamt,
+      "location": location,
+      "partnamenotes": partnamenotes,
+    };
+
+    await documentReferencer
+        .set(data)
+        .whenComplete(() => print("Repair items added to the database"))
+        .catchError((e) => print(e));
+  }
+
+  static Future<void> addItemservice({
+    String expensetype = 'Service',
+    required String vehiclename,
+    required String km,
+    required String serviceamt,
+    required String location,
+    required String notes,
+
+  }) async {
+    DocumentReference documentReferencer =
+    _mainCollection.doc(userUid).collection(expensetype).doc();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      "vehiclename": vehiclename,
+      "km": km,
+      "repairamt": serviceamt,
+      "location": location,
+      "partnamenotes": notes,
+    };
+
+    await documentReferencer
+        .set(data)
+        .whenComplete(() => print("Service items added to the database"))
+        .catchError((e) => print(e));
+  }
+
+  static Future<void> addItempucinsure({
+    String expensetype = 'puc Insurance',
+    required String vehiclename,
+    required String selecttype,
+    required String km,
+    required String pucinsureamt,
+    required String companyname,
+    required String expdate,
+    required String notes,
+
+  }) async {
+    DocumentReference documentReferencer =
+    _mainCollection.doc(userUid).collection(expensetype).doc();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      "vehiclename": vehiclename,
+      "km": km,
+      "expdate": expdate,
+      "pucinsureamt": pucinsureamt,
+      "companyname": companyname,
+      "partnamenotes": notes,
+    };
+
+    await documentReferencer
+        .set(data)
+        .whenComplete(() => print("Puc / Insurance items added to the database"))
+        .catchError((e) => print(e));
+  }
+
+
+
   static Future<void> updateItem({
     required String title,
     required String km,

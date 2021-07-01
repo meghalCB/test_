@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/HomeScreen/popular_course_list_view.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/add_screen.dart';
+import 'package:flutterfire_samples/screens/repair_add_scrren.dart';
+import 'package:flutterfire_samples/screens/service_add_scrren.dart';
 import 'package:flutterfire_samples/screens/upload_doc.dart';
+import 'package:flutterfire_samples/widgets/app_bar_title.dart';
 import 'category_list_view.dart';
 import 'course_info_screen.dart';
 import 'design_course_app_theme.dart';
@@ -133,7 +136,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     Navigator.push<dynamic>(
       context,
       MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => ImageUpload(),
+        builder: (BuildContext context) => ServiceScreen(),
       ),
     );
   }
@@ -261,7 +264,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     );
   }*/
 
-  Widget getAppBarUI() {
+/*  Widget getAppBarUI() {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, left: 18, right: 18),
       child: Row(
@@ -270,7 +273,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-               /* Text(
+               *//* Text(
                   'Choose your',
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -279,7 +282,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                     letterSpacing: 0.2,
                     color: DesignCourseAppTheme.grey,
                   ),
-                ),*/
+                ),*//*
                 Text(
                   'VehiBrain',
                   textAlign: TextAlign.left,
@@ -293,15 +296,15 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
               ],
             ),
           ),
-          /*Container(
+          *//*Container(
             width: 60,
             height: 60,
             child: Image.asset('assets/design_course/userImage.png'),
-          )*/
+          )*//*
         ],
       ),
     );
-  }
+  }*/
 }
 
 enum CategoryType {
