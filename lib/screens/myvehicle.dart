@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:card_selector/card_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
+import 'package:flutterfire_samples/screens/vehicle_screen.dart';
 import 'package:flutterfire_samples/widgets/app_bar_title.dart';
 import 'package:flutterfire_samples/widgets/transaction_card.dart';
 import 'package:flutterfire_samples/widgets/transaction_details.dart';
@@ -44,6 +45,16 @@ class _myvehicleState extends State<myvehicle> {
       appBar: AppBar(
         title: getAppBarUI(),
         automaticallyImplyLeading: false,
+        actions: <Widget>[
+          FlatButton(
+            textColor: Colors.white,
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleScreen()),);
+            },
+            child: Icon(Icons.add),
+            shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

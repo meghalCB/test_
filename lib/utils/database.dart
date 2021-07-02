@@ -122,6 +122,36 @@ class Database {
   }
 
 
+  static Future<void> addvehicle({
+    required String vehicletype,
+    required String brandname,
+    required String modelname,
+    required String vehiclenum,
+    required String km,
+    required String puc,
+    required String insurance,
+
+  }) async {
+    DocumentReference documentReferencer =
+    _mainCollection.doc(userUid).collection('MY Vehicle').doc();
+
+    Map<String, dynamic> data = <String, dynamic>{
+    "vehicletype": vehicletype,
+    "brandname": brandname,
+    "modelname": modelname,
+    "vehiclenum": vehiclenum,
+    "km": km,
+    "puc": puc,
+    "insurance": insurance,
+    };
+
+    await documentReferencer
+        .set(data)
+        .whenComplete(() => print("Vehicle(s) added to the database"))
+        .catchError((e) => print(e));
+  }
+
+
 
   static Future<void> updateItem({
     required String title,

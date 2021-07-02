@@ -5,43 +5,49 @@ import 'package:flutterfire_samples/utils/validator.dart';
 
 import 'custom_form_field.dart';
 
-class pucinsureItemForm extends StatefulWidget {
-  final FocusNode titleFocusNode;
-  final FocusNode kmFocusNode;
-  final FocusNode pucinsureamtFocusNode;
-  final FocusNode companynameFocusNode;
-  final FocusNode expdataFocusNode;
-  final FocusNode notesFocusNode;
 
-  const pucinsureItemForm({
-    required this.titleFocusNode,
+enum SingingCharacter { a, b, c }
+
+class AddVehicleForm extends StatefulWidget {
+  // final FocusNode vehicletypeFocusNode;
+  final FocusNode brandnameFocusNode;
+  final FocusNode modelnameFocusNode;
+  final FocusNode vehiclenumFocusNode;
+  final FocusNode kmFocusNode;
+  final FocusNode pucFocusNode;
+  final FocusNode insuranceFocusNode;
+
+  const AddVehicleForm({Key? key,
+    // required this.vehicletypeFocusNode,
+    required this.brandnameFocusNode,
+    required this.modelnameFocusNode,
+    required this.vehiclenumFocusNode,
     required this.kmFocusNode,
-    required this.pucinsureamtFocusNode,
-    required this.companynameFocusNode,
-    required this.notesFocusNode,
-    required this.expdataFocusNode,
+    required this.pucFocusNode,
+    required this.insuranceFocusNode
   });
 
   @override
-  _pucinsureItemFormState createState() => _pucinsureItemFormState();
+  _AddVehicleFormState createState() => _AddVehicleFormState();
 }
 
-class _pucinsureItemFormState extends State<pucinsureItemForm> {
-  final _pucinsureItemFormKey = GlobalKey<FormState>();
-
+class _AddVehicleFormState extends State<AddVehicleForm> {
+  final _AddVehicleFormKey = GlobalKey<FormState>();
+  SingingCharacter? _character = SingingCharacter.a;
   bool _isProcessing = false;
 
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _kmController = TextEditingController();
-  final TextEditingController _pucinsureamtController = TextEditingController();
-  final TextEditingController _companynameController = TextEditingController();
-  final TextEditingController _notesController = TextEditingController();
-  final TextEditingController _expdataController = TextEditingController();
+  final TextEditingController _vehicletypeFocusNode = TextEditingController();
+  final TextEditingController _brandnameFocusNode = TextEditingController();
+  final TextEditingController _modelnameFocusNode = TextEditingController();
+  final TextEditingController _vehiclenumFocusNode = TextEditingController();
+  final TextEditingController _kmFocusNode = TextEditingController();
+  final TextEditingController _pucFocusNode = TextEditingController();
+  final TextEditingController _insuranceFocusNode = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _pucinsureItemFormKey,
+      key: _AddVehicleFormKey,
       child: Column(
         children: [
           Padding(
@@ -55,7 +61,7 @@ class _pucinsureItemFormState extends State<pucinsureItemForm> {
               children: [
                 SizedBox(height: 24.0),
                 Text(
-                  'Add Details For',
+                  'Select Your Vehicle Type',
                   style: TextStyle(
                     color: CustomColors.firebaseGrey,
                     fontSize: 22.0,
@@ -64,23 +70,74 @@ class _pucinsureItemFormState extends State<pucinsureItemForm> {
                   ),
                 ),
                 SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    ListTile(
+                      title: const Text('2 wheeler'),
+                      leading: Radio<SingingCharacter>(
+                        value: SingingCharacter.a,
+                        groupValue: _character,
+                        onChanged: (SingingCharacter? value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: const Text('3 wheeler'),
+                      leading: Radio<SingingCharacter>(
+                        value: SingingCharacter.b,
+                        groupValue: _character,
+                        onChanged: (SingingCharacter? value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: const Text('4 wheeler'),
+                      leading: Radio<SingingCharacter>(
+                        value: SingingCharacter.c,
+                        groupValue: _character,
+                        onChanged: (SingingCharacter? value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 24.0),
+                Text(
+                  'Brand Name',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+
                 CustomFormField(
                   isLabelEnabled: false,
-                  controller: _titleController,
-                  focusNode: widget.titleFocusNode,
-                  keyboardType: TextInputType.text,
+                  controller: _brandnameFocusNode,
+                  focusNode: widget.brandnameFocusNode,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                   inputAction: TextInputAction.next,
                   validator: (value) => Validator.validateField(
                     value: value,
                   ),
-                  label: 'Add Details For',
-                  hint: 'Enter Add Details For',
+                  label: 'Brand Name',
+                  hint: 'Enter Brand Name',
                 ),
                 SizedBox(height: 24.0),
 
-
-                /*Text(
-                  'Enter KM',
+                Text(
+                  'Model Name',
                   style: TextStyle(
                     color: CustomColors.firebaseGrey,
                     fontSize: 22.0,
@@ -89,96 +146,70 @@ class _pucinsureItemFormState extends State<pucinsureItemForm> {
                   ),
                 ),
                 SizedBox(height: 8.0),
-
                 CustomFormField(
                   isLabelEnabled: false,
-                  controller: _kmController,
+                  controller: _modelnameFocusNode,
+                  focusNode: widget.modelnameFocusNode,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  inputAction: TextInputAction.done,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'Model Name',
+                  hint: 'Enter Model Name',
+                ),
+                SizedBox(height: 24.0),
+
+                Text(
+                  'Vehicle Number',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _vehiclenumFocusNode,
+                  focusNode: widget.vehiclenumFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.done,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'Vehicle Number',
+                  hint: 'Enter Vehicle Number',
+                ),
+                SizedBox(height: 24.0),
+
+                Text(
+                  'KiloMeter',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _kmFocusNode,
                   focusNode: widget.kmFocusNode,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  inputAction: TextInputAction.next,
-                  validator: (value) => Validator.validateField(
-                    value: value,
-                  ),
-                  label: 'Enter KM',
-                  hint: 'Enter KM',
-                ),
-                SizedBox(height: 24.0),*/
-
-                Text(
-                  'PUC / Insurance Amount',
-                  style: TextStyle(
-                    color: CustomColors.firebaseGrey,
-                    fontSize: 22.0,
-                    letterSpacing: 1,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                CustomFormField(
-                  isLabelEnabled: false,
-                  controller: _pucinsureamtController,
-                  focusNode: widget.pucinsureamtFocusNode,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  inputAction: TextInputAction.done,
-                  validator: (value) => Validator.validateField(
-                    value: value,
-                  ),
-                  label: 'PUC / Insurance Amount',
-                  hint: 'Enter PUC / Insurance Amount',
-                ),
-                SizedBox(height: 24.0),
-
-                Text(
-                  'Company Name',
-                  style: TextStyle(
-                    color: CustomColors.firebaseGrey,
-                    fontSize: 22.0,
-                    letterSpacing: 1,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                CustomFormField(
-                  isLabelEnabled: false,
-                  controller: _companynameController,
-                  focusNode: widget.companynameFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.done,
                   validator: (value) => Validator.validateField(
                     value: value,
                   ),
-                  label: 'Company Name',
-                  hint: 'Enter Company Name',
-                ),
-                SizedBox(height: 24.0),
-
-
-                Text(
-                  'Expiry Date',
-                  style: TextStyle(
-                    color: CustomColors.firebaseGrey,
-                    fontSize: 22.0,
-                    letterSpacing: 1,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                CustomFormField(
-                  isLabelEnabled: false,
-                  controller: _expdataController,
-                  focusNode: widget.expdataFocusNode,
-                  keyboardType: TextInputType.text,
-                  inputAction: TextInputAction.done,
-                  validator: (value) => Validator.validateField(
-                    value: value,
-                  ),
-                  label: 'Expiry Date',
-                  hint: 'Enter Expiry Date',
+                  label: 'KiloMeter',
+                  hint: 'Enter KiloMeter',
                 ),
                 SizedBox(height: 24.0),
 
                 Text(
-                  'Notes',
+                  'PUC Number',
                   style: TextStyle(
                     color: CustomColors.firebaseGrey,
                     fontSize: 22.0,
@@ -190,16 +221,36 @@ class _pucinsureItemFormState extends State<pucinsureItemForm> {
                 CustomFormField(
                   maxLines: 10,
                   isLabelEnabled: false,
-                  controller: _notesController,
-                  focusNode: widget.notesFocusNode,
+                  controller: _pucFocusNode,
+                  focusNode: widget.pucFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.done,
-                  /*validator: (value) => Validator.validateField(
-                    value: value,
-                  ),*/
-                  label: 'Notes',
-                  hint: 'Notes',
                   validator: (String value) {  },
+                  label: 'PUC Number',
+                  hint: 'Enter PUC Number',
+                ),
+                SizedBox(height: 24.0),
+
+                Text(
+                  'Insurance Number',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  maxLines: 10,
+                  isLabelEnabled: false,
+                  controller: _insuranceFocusNode,
+                  focusNode: widget.insuranceFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.done,
+                  validator: (String value) {  },
+                  label: 'Insurance Number',
+                  hint: 'Enter Insurance Number',
                 ),
                 SizedBox(height: 24.0),
 
@@ -229,21 +280,20 @@ class _pucinsureItemFormState extends State<pucinsureItemForm> {
                 ),
               ),
               onPressed: () async {
-                widget.titleFocusNode.unfocus();
 
-                if (_pucinsureItemFormKey.currentState!.validate()) {
+                if (_AddVehicleFormKey.currentState!.validate()) {
                   setState(() {
                     _isProcessing = true;
                   });
 
-                  await Database.addItempucinsure(
-                    expdate: '10/2/2023',
-                    vehiclename: _titleController.text,
-                    km: _kmController.text,
-                    selecttype: 'puc',
-                    pucinsureamt: _pucinsureamtController.text,
-                    companyname: _companynameController.text,
-                    notes: _notesController.text,
+                  await Database.addvehicle(
+                    vehicletype: _character.toString(),
+                    brandname: _brandnameFocusNode.text,
+                    insurance: _insuranceFocusNode.text,
+                    km: _kmFocusNode.text,
+                    modelname: _modelnameFocusNode.text,
+                    puc: _pucFocusNode.text,
+                    vehiclenum: _vehiclenumFocusNode.text,
 
                   );
 
@@ -257,7 +307,7 @@ class _pucinsureItemFormState extends State<pucinsureItemForm> {
               child: Padding(
                 padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
                 child: Text(
-                  'SUBMIT',
+                  'ADD NOW',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
