@@ -33,7 +33,7 @@ class AddVehicleForm extends StatefulWidget {
 
 class _AddVehicleFormState extends State<AddVehicleForm> {
   final _AddVehicleFormKey = GlobalKey<FormState>();
-  SingingCharacter? _character = SingingCharacter.a;
+  SingingCharacter? _character;
   bool _isProcessing = false;
 
   final TextEditingController _vehicletypeFocusNode = TextEditingController();
@@ -70,7 +70,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                   ),
                 ),
                 SizedBox(height: 8.0),
-                Row(
+                Column(
                   children: [
                     ListTile(
                       title: const Text('2 wheeler'),
@@ -126,7 +126,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                   isLabelEnabled: false,
                   controller: _brandnameFocusNode,
                   focusNode: widget.brandnameFocusNode,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: TextInputType.text,
                   inputAction: TextInputAction.next,
                   validator: (value) => Validator.validateField(
                     value: value,
@@ -150,7 +150,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                   isLabelEnabled: false,
                   controller: _modelnameFocusNode,
                   focusNode: widget.modelnameFocusNode,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: TextInputType.text,
                   inputAction: TextInputAction.done,
                   validator: (value) => Validator.validateField(
                     value: value,
@@ -219,7 +219,6 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 ),
                 SizedBox(height: 8.0),
                 CustomFormField(
-                  maxLines: 10,
                   isLabelEnabled: false,
                   controller: _pucFocusNode,
                   focusNode: widget.pucFocusNode,
@@ -242,7 +241,6 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 ),
                 SizedBox(height: 8.0),
                 CustomFormField(
-                  maxLines: 10,
                   isLabelEnabled: false,
                   controller: _insuranceFocusNode,
                   focusNode: widget.insuranceFocusNode,

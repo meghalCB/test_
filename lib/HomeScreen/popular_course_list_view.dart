@@ -107,7 +107,7 @@ class CategoryView extends StatelessWidget {
               splashColor: Colors.transparent,
               onTap: callback,
               child: SizedBox(
-                height: 280,
+                height: 200,
                 child: Stack(
                   alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
@@ -233,7 +233,7 @@ class CategoryView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
+                    /*Container(
                       child: Padding(
                         padding:
                             const EdgeInsets.only(top: 24, right: 16, left: 16),
@@ -258,7 +258,7 @@ class CategoryView extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),

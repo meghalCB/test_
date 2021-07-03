@@ -49,7 +49,7 @@ class _myvehicleState extends State<myvehicle> {
           FlatButton(
             textColor: Colors.white,
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleScreen()),);
+              Navigator.push<dynamic>(context, MaterialPageRoute<dynamic>(builder: (context) => VehicleScreen()),);
             },
             child: Icon(Icons.add),
             shape: CircleBorder(side: BorderSide(color: Colors.transparent)),

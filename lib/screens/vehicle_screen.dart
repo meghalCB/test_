@@ -16,6 +16,10 @@ class VehicleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
     return GestureDetector(
       onTap: () {
         /*_titleFocusNode.unfocus();
@@ -35,21 +39,26 @@ class VehicleScreen extends StatelessWidget {
           backgroundColor: CustomColors.firebaseNavy,
           title: getAppBarUI(),
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-              bottom: 20.0,
-            ),
-            child: SingleChildScrollView(
-              child: AddVehicleForm(
-                brandnameFocusNode: _brandname,
-                modelnameFocusNode: _modelname,
-                vehiclenumFocusNode: _vehiclenum,
-                kmFocusNode: _km,
-                pucFocusNode: _puc,
-                insuranceFocusNode: _insurance,
+        body: SizedBox(
+          height: screenHeight - keyboardHeight,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                bottom: 20.0,
+              ),
+              child: SingleChildScrollView(
+                  reverse: true,
+                  physics: ClampingScrollPhysics(),
+                child: AddVehicleForm(
+                  brandnameFocusNode: _brandname,
+                  modelnameFocusNode: _modelname,
+                  vehiclenumFocusNode: _vehiclenum,
+                  kmFocusNode: _km,
+                  pucFocusNode: _puc,
+                  insuranceFocusNode: _insurance,
+                ),
               ),
             ),
           ),

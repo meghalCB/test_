@@ -109,14 +109,14 @@ class CategoryView extends StatelessWidget {
               splashColor: Colors.transparent,
               onTap: callback,
               child: SizedBox(
-                width: 280,
+                width: 180,
                 child: Stack(
                   children: <Widget>[
                     Container(
                       child: Row(
                         children: <Widget>[
                           const SizedBox(
-                            width: 48,
+                            width: 10,
                           ),
                           Expanded(
                             child: Container(
@@ -128,7 +128,7 @@ class CategoryView extends StatelessWidget {
                               child: Row(
                                 children: <Widget>[
                                   const SizedBox(
-                                    width: 48 + 24.0,
+                                    // width: 10 + 24.0,
                                   ),
                                   Expanded(
                                     child: Container(
@@ -136,13 +136,13 @@ class CategoryView extends StatelessWidget {
                                         children: <Widget>[
                                           Padding(
                                             padding:
-                                                const EdgeInsets.only(top: 16),
+                                                const EdgeInsets.only(top: 21,left: 21,),
                                             child: Text(
                                               category!.title,
-                                              textAlign: TextAlign.left,
+                                              // textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 16,
+                                                fontSize: 23,
                                                 letterSpacing: 0.27,
                                                 color: DesignCourseAppTheme
                                                     .darkerText,
@@ -213,16 +213,19 @@ class CategoryView extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
-                                                Text(
-                                                  '\u20B9${category!.total_expense}',
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 18,
-                                                    letterSpacing: 0.27,
-                                                    color: DesignCourseAppTheme
-                                                        .darkerText,
-                                                  ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 14),
+                                                  /*child: Text(
+                                                    '\u20B9${category!.total_expense}',
+                                                    textAlign: TextAlign.left,
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 18,
+                                                      letterSpacing: 0.27,
+                                                      color: DesignCourseAppTheme
+                                                          .darkerText,
+                                                    ),
+                                                  ),*/
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
@@ -259,7 +262,7 @@ class CategoryView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
+                    /*Container(
                       child: Padding(
                         padding: const EdgeInsets.only(
                             top: 24, bottom: 24, left: 16),
@@ -275,7 +278,7 @@ class CategoryView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
