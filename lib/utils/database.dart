@@ -211,6 +211,27 @@ class Database {
         .catchError((e) => print(e));*/
   }
 
+
+  static Future<void> addDocument({
+    required String docName,
+    required String imagePath,
+
+  }) async {
+    DocumentReference documentReferencer =
+    _mainCollection.doc(userUid).collection('MY Document').doc();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      "docName": docName,
+      "imagePath": imagePath,
+    };
+
+    await documentReferencer
+        .set(data)
+        .whenComplete(() => print("Document(s) added to the database"))
+        .catchError((e) => print(e));
+  }
+
+
   static Stream<QuerySnapshot> readItems() {
     CollectionReference notesItemCollection =
         _mainCollection.doc(userUid).collection('items');
@@ -220,9 +241,16 @@ class Database {
 
   static Stream<QuerySnapshot> readVehicleItems() {
     CollectionReference notesVehicleItemCollection =
-    _mainCollection.doc(userUid).collection('My Vehicle');
+    _mainCollection.doc(userUid).collection('MY Vehicle');
 
     return notesVehicleItemCollection.snapshots();
+  }
+
+  static Stream<QuerySnapshot> readDocumentItems() {
+    CollectionReference notesDocumentItemCollection =
+    _mainCollection.doc(userUid).collection('MY Document');
+
+    return notesDocumentItemCollection.snapshots();
   }
 
 /*  static Stream<QuerySnapshot> getItem() {

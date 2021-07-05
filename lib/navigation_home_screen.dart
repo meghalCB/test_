@@ -7,6 +7,9 @@ import 'package:flutterfire_samples/home_screen.dart';
 import 'package:flutterfire_samples/invite_friend_screen.dart';*/
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/screens/dashboard_screen.dart';
+import 'package:flutterfire_samples/screens/mycar_list.dart';
+import 'package:flutterfire_samples/screens/mydocuments_list.dart';
+import 'package:flutterfire_samples/screens/mytransaction_list.dart';
 import 'package:flutterfire_samples/screens/myvehicle.dart';
 import 'package:flutterfire_samples/screens/upload_doc.dart';
 
@@ -62,11 +65,15 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         });
       } else if (drawerIndex == DrawerIndex.MYVehicle) {
         setState(() {
-          screenView = myvehicle();
+          screenView = VehicleScreen();//myvehicle
+        });
+      }else if (drawerIndex == DrawerIndex.MyTransaction) {
+        setState(() {
+          screenView = TransactionScreen();//myvehicle
         });
       }else if (drawerIndex == DrawerIndex.Documents) {
         setState(() {
-          screenView = ImageUpload();
+          screenView = DocumentScreen(); //ImageUpload
         });
       }
       /*else if (drawerIndex == DrawerIndex.Help) {

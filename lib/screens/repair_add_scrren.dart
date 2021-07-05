@@ -26,7 +26,7 @@ class RepairScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: CustomColors.firebaseNavy,
-          title: getAppBarUI(),
+          title: getAppBarUI('Repair'),
         ),
         body: SafeArea(
           child: Padding(

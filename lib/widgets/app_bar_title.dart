@@ -7,7 +7,7 @@ import 'package:flutterfire_samples/res/custom_colors.dart';
   // Widget build(BuildContext context) {
 
 
-      Widget getAppBarUI() {
+      Widget getAppBarUI(String s) {
       return Padding(
         padding: const EdgeInsets.only(top: 8.0, left: 18, right: 18),
         child: Row(
@@ -27,7 +27,7 @@ import 'package:flutterfire_samples/res/custom_colors.dart';
                   ),
                 ),*/
                   Text(
-                    'VehiBrain',
+                    s,
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

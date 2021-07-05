@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
+import 'package:flutterfire_samples/widgets/add_document_form.dart';
 import 'package:flutterfire_samples/widgets/add_item_form.dart';
 import 'package:flutterfire_samples/widgets/add_vehicle_form.dart';
 import 'package:flutterfire_samples/widgets/app_bar_title.dart';
 
-class AddVehicleScreen extends StatelessWidget {
-  final FocusNode _vehicletype = FocusNode();
-  final FocusNode _brandname = FocusNode();
-  final FocusNode _modelname = FocusNode();
-  final FocusNode _vehiclenum = FocusNode();
-  final FocusNode _km = FocusNode();
-  final FocusNode _puc = FocusNode();
-  final FocusNode _insurance = FocusNode();
+class AddDocumentScreen extends StatelessWidget {
+  final FocusNode _docname = FocusNode();
 
 
   @override
@@ -49,15 +44,10 @@ class AddVehicleScreen extends StatelessWidget {
                 bottom: 20.0,
               ),
               child: SingleChildScrollView(
-                  reverse: true,
-                  physics: ClampingScrollPhysics(),
-                child: AddVehicleForm(
-                  brandnameFocusNode: _brandname,
-                  modelnameFocusNode: _modelname,
-                  vehiclenumFocusNode: _vehiclenum,
-                  kmFocusNode: _km,
-                  pucFocusNode: _puc,
-                  insuranceFocusNode: _insurance,
+                reverse: true,
+                physics: ClampingScrollPhysics(),
+                child: AddDocumentForm(
+                  docNameFocusNode: _docname,
                 ),
               ),
             ),

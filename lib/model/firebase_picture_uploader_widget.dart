@@ -104,14 +104,14 @@ class ImageManipulationSettings {
 class PictureUploadButtonStyle {
   /// Style options for PictureUploadWidget
   PictureUploadButtonStyle({
-    this.iconData = CupertinoIcons.photo_camera,
+    this.iconData = CupertinoIcons.cloud_upload,
     this.iconSize = 40.0,
-    this.backgroundColor = CupertinoColors.systemBlue,
-    this.width = 80,
+    this.backgroundColor = Colors.orange,//CupertinoColors.systemBlue
+    this.width = 100,
     this.height = 100,
     this.fontColor = CupertinoColors.white,
     this.fontSize = 14.0,
-    this.closeIconColor = CupertinoColors.systemBlue,
+    this.closeIconColor = Colors.orange,//CupertinoColors.systemBlue
     this.closeIconBackgroundColor = CupertinoColors.lightBackgroundGray,
   });
 
@@ -608,7 +608,7 @@ class _SingleProfilePictureUploadWidgetState
           children: <Widget>[
             GestureDetector(
               onTap: !widget.pictureUploadWidget.enabled ? null : _deleteImage,
-              child: Container(
+              /*child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white,
@@ -623,7 +623,7 @@ class _SingleProfilePictureUploadWidgetState
                     color:
                         widget.pictureUploadWidget.buttonStyle.closeIconColor,
                     size: 17.0),
-              ),
+              ),*/
             ),
           ],
         ));

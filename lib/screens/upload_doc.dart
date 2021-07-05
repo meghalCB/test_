@@ -24,7 +24,7 @@ class _ImageUploadState extends State<ImageUpload> {
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text('Profile Your Details',
+          const Text('Upload Your Documents',
               style: TextStyle(
                 color: CupertinoColors.systemBlue,
                 fontSize: 15.0,

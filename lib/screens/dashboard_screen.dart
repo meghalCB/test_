@@ -29,9 +29,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: CustomColors.firebaseNavy,
-        title: getAppBarUI(),//
+        title: getAppBarUI('VehiBrain'),//
       ),
-      drawer: FoldableSidebarBuilder(
+      /*drawer: FoldableSidebarBuilder(
         drawerBackgroundColor: Colors.transparent,
         drawer: CustomSidebarDrawer(drawerClose: (){
           setState(() {
@@ -41,7 +41,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         screenContents: Text(''),
         status: FSBStatus.FSB_OPEN,
-        /*child: SafeArea(
+        *//*child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(
               left: 16.0,
@@ -50,8 +50,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             child: ItemList(),
           ),
-        ),*/
-      ),
+        ),*//*
+      ),*/
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(

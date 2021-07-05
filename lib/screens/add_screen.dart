@@ -32,7 +32,7 @@ class AddScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: CustomColors.firebaseNavy,
-          title: getAppBarUI(),
+          title: getAppBarUI('Add Fuel'),
         ),
         body: SafeArea(
           child: Padding(

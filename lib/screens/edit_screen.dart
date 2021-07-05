@@ -38,7 +38,7 @@ class _EditScreenState extends State<EditScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: CustomColors.firebaseNavy,
-          title: getAppBarUI(),
+          title: getAppBarUI('VehiBrain'),
           actions: [
             _isDeleting
                 ? Padding(

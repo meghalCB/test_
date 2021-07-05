@@ -28,7 +28,7 @@ class ServiceScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: CustomColors.firebaseNavy,
-          title: getAppBarUI(),
+          title: getAppBarUI('Service'),
         ),
         body: SafeArea(
           child: Padding(

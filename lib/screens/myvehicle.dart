@@ -43,13 +43,13 @@ class _myvehicleState extends State<myvehicle> {
     return Scaffold(
       backgroundColor: CustomColors.firebaseNavy,
       appBar: AppBar(
-        title: getAppBarUI(),
+        title: getAppBarUI('MY Vehicles'),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           FlatButton(
             textColor: Colors.white,
             onPressed: () {
-              Navigator.push<dynamic>(context, MaterialPageRoute<dynamic>(builder: (context) => VehicleScreen()),);
+              Navigator.push<dynamic>(context, MaterialPageRoute<dynamic>(builder: (context) => AddVehicleScreen()),);
             },
             child: Icon(Icons.add),
             shape: CircleBorder(side: BorderSide(color: Colors.transparent)),

@@ -36,6 +36,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
         icon: Icon(Icons.directions_car_outlined),
       ),
       DrawerList(
+        index: DrawerIndex.MyTransaction,
+        labelName: 'My Transaction',
+        icon: Icon(Icons.trending_up),
+      ),
+      DrawerList(
         index: DrawerIndex.Documents,
         labelName: 'My Documents',
         icon: Icon(Icons.file_copy_outlined),
@@ -281,6 +286,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
 enum DrawerIndex {
   HOME,
   MYVehicle,
+  MyTransaction,
   Documents,
   /*FeedBack,
   Help,

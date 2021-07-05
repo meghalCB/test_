@@ -34,7 +34,7 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Container(
-        // height: 400,
+        height: 800,
         child: FutureBuilder<bool>(
           future: getData(),
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
@@ -107,13 +107,15 @@ class CategoryView extends StatelessWidget {
               splashColor: Colors.transparent,
               onTap: callback,
               child: SizedBox(
-                height: 200,
+                height: 20,
                 child: Stack(
                   alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
                     Container(
+                      height: 130,
                       child: Column(
                         children: <Widget>[
+
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(
@@ -227,9 +229,9 @@ class CategoryView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 48,
-                          ),
+                          /*const SizedBox(
+                            height: 8,
+                          ),*/
                         ],
                       ),
                     ),

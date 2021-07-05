@@ -31,7 +31,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 14,bottom: 14),
-              child: getAppBarUI(),
+              child: getAppBarUI('VehiBrain'),
             ),
             Expanded(
               child: SingleChildScrollView(
