@@ -382,6 +382,7 @@ class _SingleProfilePictureUploadWidgetState
 
   void onProfileImageURLReceived(String downloadURL) {
     setState(() {
+      print('testimage'+downloadURL);
       _uploadJob.imageProvider = CachedNetworkImageProvider(downloadURL);
       _uploadJob.uploadProcessing = false;
     });
@@ -602,13 +603,13 @@ class _SingleProfilePictureUploadWidgetState
         width: widget.pictureUploadWidget.buttonStyle.width + 10,
         height: widget.pictureUploadWidget.buttonStyle.height,
         color: Colors.transparent,
-        child: Row(
+    /*child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             GestureDetector(
               onTap: !widget.pictureUploadWidget.enabled ? null : _deleteImage,
-              /*child: Container(
+              child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white,
@@ -623,12 +624,13 @@ class _SingleProfilePictureUploadWidgetState
                     color:
                         widget.pictureUploadWidget.buttonStyle.closeIconColor,
                     size: 17.0),
-              ),*/
+              ),
             ),
           ],
-        ));
+        )*/
+    );
 
-    return new Stack(
+    return Stack(
       children: [
         existingImageWidget,
         _uploadJob.uploadProcessing

@@ -42,6 +42,7 @@ class FirebasePictureUploadController {
     try {
       final String downloadLink =
           await _storageInstance.ref().child(storageURL).getDownloadURL();
+      print(downloadLink);
 
       // cache link
       if (useCaching || storeInCache) {

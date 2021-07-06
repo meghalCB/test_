@@ -1,14 +1,86 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/model/firebase_picture_uploader_widget.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/edit_screen.dart';
 import 'package:flutterfire_samples/utils/database.dart';
 
+
+
+Future<List<Map<String, dynamic>>> _loadImages() async {
+  List<Map<String, dynamic>> files = [];
+  FirebaseStorage storage = FirebaseStorage.instance;
+
+  final ListResult result = await storage.ref().list();
+  final List<Reference> allFiles = result.items;
+
+  await new Future.delayed(new Duration(seconds: 5));
+
+  await Future.forEach<Reference>(allFiles, (file) async {
+    final String fileUrl = await file.getDownloadURL();
+    final FullMetadata fileMeta = await file.getMetadata();
+    files.add({
+      "url": fileUrl,
+      "path": file.fullPath,
+      "uploaded_by": fileMeta.customMetadata?['uploaded_by'] ?? 'Nobody',
+      "description":
+      fileMeta.customMetadata?['description'] ?? 'No description'
+    });
+  });
+
+  return files;
+}
+
 class ItemDocumentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
+
+    return Expanded(
+      child: FutureBuilder(
+        future: _loadImages(),
+        builder: (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return ListView.builder(
+              itemCount: snapshot.data?.length ?? 0,
+              itemBuilder: (context, index) {
+                final Map<String, dynamic> image =
+                snapshot.data![index];
+
+                print(Image.network(image['url']));
+
+                return Card(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: ListTile(
+                    dense: false,
+                    leading: Image.network(image['url']),
+                    title: Text(image['uploaded_by']),
+                    subtitle: Text(image['description']),
+                    /*    trailing: IconButton(
+                                  onPressed: () => _delete(image['path']),
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  ),
+                                ),*/
+                  ),
+                );
+              },
+            );
+          }
+
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                CustomColors.firebaseOrange,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+
+/*    return StreamBuilder<QuerySnapshot>(
       stream: Database.readDocumentItems(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -35,7 +107,7 @@ class ItemDocumentList extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    /*  onTap: () => Navigator.of(context).push(
+                    *//*  onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => EditScreen(
                           currentTitle: title,
@@ -43,7 +115,7 @@ class ItemDocumentList extends StatelessWidget {
                           documentId: docID,
                         ),
                       ),
-                    ),*/
+                    ),*//*
 
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,23 +138,26 @@ class ItemDocumentList extends StatelessWidget {
 
                       ],
                     ),
-                    /*trailing: Wrap(
+                    *//*trailing: Wrap(
                       children: <Widget>[
                         // Icon()
                         Icon(Icons.directions_car_outlined)
                       ],
-                    ),*/
-                    /*subtitle: Text(
+                    ),*//*
+                    *//*subtitle: Text(
                       modelname,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                    ),*/
+                    ),*//*
                   ),
                 ),
               );
             },
           );
         }
+
+
+
 
         return Center(
           child: CircularProgressIndicator(
@@ -92,9 +167,9 @@ class ItemDocumentList extends StatelessWidget {
           ),
         );
       },
-    );
+    );*/
   }
-
-
-
 }
+
+
+

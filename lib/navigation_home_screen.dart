@@ -12,6 +12,7 @@ import 'package:flutterfire_samples/screens/mydocuments_list.dart';
 import 'package:flutterfire_samples/screens/mytransaction_list.dart';
 import 'package:flutterfire_samples/screens/myvehicle.dart';
 import 'package:flutterfire_samples/screens/upload_doc.dart';
+import 'package:flutterfire_samples/widgets/uploadDoc.dart';
 
 import 'HomeScreen/home_design_course.dart';
 import 'home_screen.dart';
@@ -73,7 +74,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         });
       }else if (drawerIndex == DrawerIndex.Documents) {
         setState(() {
-          screenView = DocumentScreen(); //ImageUpload
+          screenView = DocumentScreen(); //ImageUpload //uploadDoc
         });
       }
       /*else if (drawerIndex == DrawerIndex.Help) {
