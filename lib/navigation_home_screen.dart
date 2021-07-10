@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterfire_samples/app_theme.dart';
 import 'package:flutterfire_samples/custom_drawer/drawer_user_controller.dart';
 import 'package:flutterfire_samples/custom_drawer/home_drawer.dart';
@@ -18,6 +19,10 @@ import 'HomeScreen/home_design_course.dart';
 import 'home_screen.dart';
 
 class NavigationHomeScreen extends StatefulWidget {
+
+  final User user;
+
+  const NavigationHomeScreen({Key? key, required this.user}) : super(key: key);
   @override
   _NavigationHomeScreenState createState() => _NavigationHomeScreenState();
 }
@@ -26,8 +31,12 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
   Widget? screenView;
   DrawerIndex? drawerIndex;
 
+  late User _currentUser;
+
   @override
   void initState() {
+    _currentUser = widget.user;
+    print('${_currentUser.displayName}');
     drawerIndex = DrawerIndex.HOME;
     screenView = DesignCourseHomeScreen();
     super.initState();
@@ -43,6 +52,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         child: Scaffold(
           backgroundColor: AppTheme.nearlyWhite,
           body: DrawerUserController(
+            username: '${_currentUser.displayName}',
             screenIndex: drawerIndex,
             drawerWidth: MediaQuery.of(context).size.width * 0.75,
             onDrawerCall: (DrawerIndex drawerIndexdata) {

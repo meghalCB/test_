@@ -15,8 +15,10 @@ class DrawerUserController extends StatefulWidget {
     this.menuView,
     this.drawerIsOpen,
     this.screenIndex,
+    required this.username,
   }) : super(key: key);
 
+  final String username;
   final double drawerWidth;
   final Function(DrawerIndex)? onDrawerCall;
   final Widget? screenView;
@@ -38,6 +40,7 @@ class _DrawerUserControllerState extends State<DrawerUserController> with Ticker
 
   @override
   void initState() {
+
     animationController = AnimationController(duration: const Duration(milliseconds: 2000), vsync: this);
     iconAnimationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 0));
     iconAnimationController?..animateTo(1.0, duration: const Duration(milliseconds: 0), curve: Curves.fastOutSlowIn);
@@ -105,6 +108,7 @@ class _DrawerUserControllerState extends State<DrawerUserController> with Ticker
                       //transform we use for the stable drawer  we, not need to move with scroll view
                       transform: Matrix4.translationValues(scrollController!.offset, 0.0, 0.0),
                       child: HomeDrawer(
+                        userName: widget.username,
                         screenIndex: widget.screenIndex == null ? DrawerIndex.HOME : widget.screenIndex,
                         iconAnimationController: iconAnimationController,
                         callBackIndex: (DrawerIndex indexType) {

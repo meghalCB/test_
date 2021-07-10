@@ -7,6 +7,7 @@ class Database {
   static String? userUid;
 
   static String? docId;
+  static String? userName;
 
   static Future<void> addItem({
     required String title,
@@ -235,6 +236,13 @@ class Database {
   static Stream<QuerySnapshot> readItems() {
     CollectionReference notesItemCollection =
         _mainCollection.doc(userUid).collection('items');
+
+    return notesItemCollection.snapshots();
+  }
+
+  static Stream<QuerySnapshot> getusername() {
+    CollectionReference notesItemCollection =
+    _mainCollection.doc(userUid).collection('items');
 
     return notesItemCollection.snapshots();
   }

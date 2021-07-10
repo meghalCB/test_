@@ -1,21 +1,26 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/HomeScreen/design_course_app_theme.dart';
+import 'package:flutterfire_samples/screens/login_page.dart';
 
 import '../app_theme.dart';
 
 class HomeDrawer extends StatefulWidget {
-  const HomeDrawer({Key? key, this.screenIndex, this.iconAnimationController, this.callBackIndex}) : super(key: key);
+  const HomeDrawer({Key? key, this.screenIndex, this.iconAnimationController, this.callBackIndex, this.userName,}) : super(key: key);
 
   final AnimationController? iconAnimationController;
   final DrawerIndex? screenIndex;
   final Function(DrawerIndex)? callBackIndex;
+  final String? userName;
 
   @override
   _HomeDrawerState createState() => _HomeDrawerState();
 }
 
 class _HomeDrawerState extends State<HomeDrawer> {
+
+
   List<DrawerList>? drawerList;
   @override
   void initState() {
@@ -74,6 +79,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
     ];
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,8 +128,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8, left: 4),
-                    child: Text(
-                      'User Name',
+                    child: Text('${widget.userName}',//'User Name',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: AppTheme.grey,
@@ -186,7 +192,21 @@ class _HomeDrawerState extends State<HomeDrawer> {
     );
   }
   
-  void onTapped() {
+  void onTapped() async{
+    bool _isSigningOut = false;
+
+      setState(() {
+        _isSigningOut = true;
+      });
+      await FirebaseAuth.instance.signOut();
+      setState(() {
+        _isSigningOut = false;
+      });
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => LoginPage(),
+        ),
+      );
     print('Doing Something...'); // Print to console.
   }
 

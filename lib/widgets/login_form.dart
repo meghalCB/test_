@@ -75,7 +75,7 @@ class _LoginFormState extends State<LoginForm> {
 
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => NavigationHomeScreen(),//DashboardScreen()
+                        builder: (context) => DashboardScreen() ,//NavigationHomeScreen(user: user,)
                       ),
                     );
                   }
