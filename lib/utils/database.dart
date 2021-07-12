@@ -247,6 +247,13 @@ class Database {
     return notesItemCollection.snapshots();
   }
 
+  static Stream<QuerySnapshot> getvehiclename() {
+    CollectionReference notesItemCollection =
+    _mainCollection.doc(userUid).collection('MY Vehicle');
+
+    return notesItemCollection.snapshots();
+  }
+
   static Stream<QuerySnapshot> readVehicleItems() {
     CollectionReference notesVehicleItemCollection =
     _mainCollection.doc(userUid).collection('MY Vehicle');

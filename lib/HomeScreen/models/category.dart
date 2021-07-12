@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Category {
   Category({
     this.title = '',
@@ -6,6 +8,9 @@ class Category {
     this.money = 0,
     this.total_expense = 0,
     this.rating = 0.0,
+    this.navigteto = '',
+    this.colors = Colors.red,
+
   });
 
   String title;
@@ -14,6 +19,8 @@ class Category {
   int total_expense;
   double rating;
   String imagePath;
+  String navigteto;
+  Color colors;
 
   static List<Category> categoryList = <Category>[
     Category(
@@ -23,6 +30,8 @@ class Category {
       money: 25,
       total_expense: 20000,
       rating: 4.3,
+      navigteto: 'add_screen',
+      colors: Colors.pinkAccent.shade100,
     ),
     Category(
       imagePath: 'assets/design_course/interFace2.png',
@@ -31,6 +40,8 @@ class Category {
       money: 18,
       total_expense: 20000,
       rating: 4.6,
+      navigteto: 'add_screen',
+      colors: Colors.green,
     ),
     Category(
       imagePath: 'assets/design_course/interFace1.png',
@@ -39,6 +50,8 @@ class Category {
       money: 25,
       total_expense: 20000,
       rating: 4.3,
+      navigteto: 'add_screen',
+      colors: Colors.indigo.shade600,
     ),
     Category(
       imagePath: 'assets/design_course/interFace2.png',
@@ -47,6 +60,8 @@ class Category {
       money: 18,
       total_expense: 20000,
       rating: 4.6,
+      navigteto: 'add_screen',
+      colors: Colors.orange.shade300,
     ),
     Category(
       imagePath: 'assets/design_course/interFace2.png',
@@ -55,6 +70,8 @@ class Category {
       money: 18,
       total_expense: 20000,
       rating: 4.6,
+      navigteto: 'add_screen',
+      colors: Colors.white30,
     ),
   ];
 
@@ -66,6 +83,8 @@ class Category {
       money: 25,
       total_expense: 20000,
       rating: 4.8,
+      navigteto: 'add_screen',
+      colors: Colors.pinkAccent.shade200,
     ),
     Category(
       imagePath: 'assets/design_course/interFace4.png',
@@ -74,6 +93,8 @@ class Category {
       money: 208,
       total_expense: 20000,
       rating: 4.9,
+      navigteto: 'add_screen',
+      colors: Colors.green.shade500,
     ),
     Category(
       imagePath: 'assets/design_course/interFace3.png',
@@ -82,6 +103,8 @@ class Category {
       money: 25,
       total_expense: 20000,
       rating: 4.8,
+      navigteto: 'add_screen',
+      colors: Colors.indigo.shade200,
     ),
     Category(
       imagePath: 'assets/design_course/interFace4.png',
@@ -90,6 +113,8 @@ class Category {
       money: 208,
       total_expense: 20000,
       rating: 4.9,
+      navigteto: 'add_screen',
+      colors: Colors.orange.shade700,
     ),
     Category(
       imagePath: 'assets/design_course/interFace4.png',
@@ -98,6 +123,8 @@ class Category {
       money: 188,
       total_expense: 20000,
       rating: 4.9,
+      navigteto: 'add_screen',
+      colors: const Color(0xB3E3E2E2),
     ),
   ];
 }

@@ -1,6 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
+import 'package:flutterfire_samples/screens/add_screen.dart';
+import 'package:flutterfire_samples/screens/pucinsure_add_scrren.dart';
+import 'package:flutterfire_samples/screens/repair_add_scrren.dart';
+import 'package:flutterfire_samples/screens/service_add_scrren.dart';
+import 'package:flutterfire_samples/screens/tyrecare.dart';
 
 import 'design_course_app_theme.dart';
 import 'models/category.dart';
@@ -87,13 +92,14 @@ class CategoryView extends StatelessWidget {
       this.category,
       this.animationController,
       this.animation,
-      this.callback})
+      this.callback, this.navigateto})
       : super(key: key);
 
   final VoidCallback? callback;
   final Category? category;
   final AnimationController? animationController;
   final Animation<double>? animation;
+  final String? navigateto;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +113,20 @@ class CategoryView extends StatelessWidget {
                 100 * (1.0 - animation!.value), 0.0, 0.0),
             child: InkWell(
               splashColor: Colors.transparent,
-              onTap: callback,
+              onTap: (){
+                // print(category!.navigteto.toString());
+                if(category!.title == 'Fuel'){
+                  Navigator.push<dynamic>(context, MaterialPageRoute<dynamic>(builder: (BuildContext context) => AddScreen(),),);
+                }else if(category!.title == 'Repair'){
+                  Navigator.push<dynamic>(context, MaterialPageRoute<dynamic>(builder: (BuildContext context) => RepairScreen(),),);
+                }else if(category!.title == 'Service'){
+                  Navigator.push<dynamic>(context, MaterialPageRoute<dynamic>(builder: (BuildContext context) => ServiceScreen(),),);
+                }else if(category!.title == 'PUC / Insurance'){
+                  Navigator.push<dynamic>(context, MaterialPageRoute<dynamic>(builder: (BuildContext context) => pucinsureScreen(),),);
+                }else if(category!.title == 'Tyre Care'){
+                  Navigator.push<dynamic>(context, MaterialPageRoute<dynamic>(builder: (BuildContext context) => TyreScreen(),),);
+                }
+              },//callback
               child: SizedBox(
                 width: 180,
                 child: Stack(
@@ -121,7 +140,7 @@ class CategoryView extends StatelessWidget {
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(
-                                color: DesignCourseAppTheme.nearlyWhite,
+                                color: category!.colors,
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(16.0)),
                               ),

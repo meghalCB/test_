@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/HomeScreen/popular_course_list_view.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/add_screen.dart';
+import 'package:flutterfire_samples/screens/mytransaction_list.dart';
 import 'package:flutterfire_samples/screens/repair_add_scrren.dart';
 import 'package:flutterfire_samples/screens/service_add_scrren.dart';
 import 'package:flutterfire_samples/screens/upload_doc.dart';
@@ -108,7 +109,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
 
   Widget getPopularCourseUI() {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
+      padding: const EdgeInsets.only(top: 16.0, left: 18, right: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,7 +140,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     Navigator.push<dynamic>(
       context,
       MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => ServiceScreen(),
+        builder: (BuildContext context) => TransactionScreen(),
       ),
     );
   }

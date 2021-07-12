@@ -66,9 +66,9 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
                 ),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 32.0,
-                  crossAxisSpacing: 32.0,
-                  childAspectRatio: 0.8,
+                  mainAxisSpacing: 25.0,
+                  crossAxisSpacing: 25.0,
+                  childAspectRatio: 1.3,
                 ),
               );
             }
@@ -109,13 +109,12 @@ class CategoryView extends StatelessWidget {
               child: SizedBox(
                 height: 20,
                 child: Stack(
-                  alignment: AlignmentDirectional.bottomCenter,
+                  alignment: AlignmentDirectional.topStart,
                   children: <Widget>[
                     Container(
                       height: 130,
                       child: Column(
                         children: <Widget>[
-
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(
@@ -126,6 +125,7 @@ class CategoryView extends StatelessWidget {
                                 //     color: DesignCourseAppTheme.notWhite),
                               ),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Expanded(
                                     child: Container(
@@ -139,10 +139,9 @@ class CategoryView extends StatelessWidget {
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 16,
+                                                fontSize: 18,
                                                 letterSpacing: 0.27,
-                                                color: DesignCourseAppTheme
-                                                    .darkerText,
+                                                color: Colors.white70,
                                               ),
                                             ),
                                           ),
@@ -156,11 +155,10 @@ class CategoryView extends StatelessWidget {
                                               '\u20B9${category!.total_expense}',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 17,
+                                                fontWeight: FontWeight.w900,
+                                                fontSize: 21,
                                                 letterSpacing: 0.27,
-                                                color: DesignCourseAppTheme
-                                                    .darkerText,
+                                                color: category!.colors,
                                               ),
                                             ),
                                           ),
@@ -173,7 +171,7 @@ class CategoryView extends StatelessWidget {
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
-                                                      .spaceBetween,
+                                                      .start,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: <Widget>[

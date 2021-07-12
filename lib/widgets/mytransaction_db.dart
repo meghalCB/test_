@@ -21,7 +21,7 @@ class ItemTransactionList extends StatelessWidget {
               String docID = snapshot.data!.docs[index].id;
               String title = noteInfo['title'];
               String fuelamt = noteInfo['fuelamt'];
-              // String description = noteInfo['description'];
+              String description = noteInfo['description'];
 
               return Ink(
                 decoration: BoxDecoration(

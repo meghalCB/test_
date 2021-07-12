@@ -50,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
         _focusPassword.unfocus();
       },
       child: Scaffold(
+        backgroundColor: CustomColors.firebaseNavy,
         appBar: AppBar(
           backgroundColor: CustomColors.firebaseNavy,
           title: Text('VehiBrain'),
@@ -59,17 +60,21 @@ class _LoginPageState extends State<LoginPage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                padding: const EdgeInsets.all(24.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 24.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Login',
-                        style: Theme.of(context).textTheme.headline1,
+                        style: TextStyle(fontWeight: FontWeight.w800,fontSize: 45),
                       ),
                     ),
+                    Text('Fill the form to log in',
+                      style: TextStyle(fontWeight: FontWeight.w800,fontSize: 25),
+                    ),
+                    SizedBox(height: 100.0,),
                     Form(
                       key: _formKey,
                       child: Column(
@@ -117,6 +122,16 @@ class _LoginPageState extends State<LoginPage> {
                                   children: [
                                     Expanded(
                                       child: ElevatedButton(
+                                        style: ButtonStyle(
+                                          backgroundColor: MaterialStateProperty.all(
+                                            CustomColors.firebaseOrange,
+                                          ),
+                                          shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                        ),
                                         onPressed: () async {
                                           _focusEmail.unfocus();
                                           _focusPassword.unfocus();
@@ -150,16 +165,25 @@ class _LoginPageState extends State<LoginPage> {
                                             }
                                           }
                                         },
-                                        child: Text(
-                                          'Sign In',
-                                          style: TextStyle(color: Colors.white),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                                          child: Text(
+                                            'Sign In',
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                              color: CustomColors.firebaseGrey,
+                                              letterSpacing: 2,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
-                          SizedBox(height: 24.0),
-                          ElevatedButton(
+                          SizedBox(height: 35.0),
+
+                          /*ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
@@ -172,11 +196,60 @@ class _LoginPageState extends State<LoginPage> {
                                 'Register',
                                 style: TextStyle(color: Colors.white,),
                               ),
+                            ),*/
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: FractionalOffset.bottomCenter,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Don\'t have account yet?'),
+                          SizedBox(width: 8.0),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                CustomColors.firebaseOrange,
+                              ),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
                             ),
+                            onPressed: () {
+                              // widget.focusNode.unfocus();
+
+                              /*if (_loginInFormKey.currentState!.validate()) {
+                                      Database.userUid = _uidController.text;*/
+
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => RegisterPage() ,//NavigationHomeScreen(user: user,)
+                                ),
+                              );
+                              // }
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                              child: Text(
+                                'Register',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: CustomColors.firebaseGrey,
+                                  letterSpacing: 2,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ],
+
                 ),
               );
             }
