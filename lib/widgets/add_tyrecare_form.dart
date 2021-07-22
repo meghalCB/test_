@@ -7,20 +7,20 @@ import 'package:flutterfire_samples/utils/validator.dart';
 import 'custom_form_field.dart';
 import 'mytransaction_db.dart';
 
+enum SingingCharacter { airFill, puncher }
+
 class AddtyrecareForm extends StatefulWidget {
   final FocusNode titleFocusNode;
   final FocusNode kmFocusNode;
-  final FocusNode fuelamtFocusNode;
+  final FocusNode tyreCareamtFocusNode;
   final FocusNode fuelplFocusNode;
   final FocusNode locationFocusNode;
   final FocusNode notesFocusNode;
-  final FocusNode descriptionFocusNode;
 
   const AddtyrecareForm({
     required this.titleFocusNode,
-    required this.descriptionFocusNode,
     required this.kmFocusNode,
-    required this.fuelamtFocusNode,
+    required this.tyreCareamtFocusNode,
     required this.fuelplFocusNode,
     required this.locationFocusNode,
     required this.notesFocusNode,
@@ -32,16 +32,15 @@ class AddtyrecareForm extends StatefulWidget {
 
 class _AddtyrecareFormState extends State<AddtyrecareForm> {
   final _AddtyrecareFormKey = GlobalKey<FormState>();
-
+  SingingCharacter? _character;
   bool _isProcessing = false;
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _kmController = TextEditingController();
-  final TextEditingController _fuelamtController = TextEditingController();
+  final TextEditingController _tyreCareamtController = TextEditingController();
   final TextEditingController _fuelplController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +58,164 @@ class _AddtyrecareFormState extends State<AddtyrecareForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 24.0),
-                ItemDropdown(),
+                // ItemDropdown(),
+                Text(
+                  'Add Tyre Care For',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _titleController,
+                  focusNode: widget.titleFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.next,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'Add Tyre Care For',
+                  hint: 'Enter Tyre Care For',
+                ),
+                SizedBox(height: 24.0),
+                Text(
+                  'Select Tyre Care Service Type',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                Column(
+                  children: [
+                    ListTile(
+                      title: const Text('Air Fill'),
+                      leading: Radio<SingingCharacter>(
+                        value: SingingCharacter.airFill,
+                        groupValue: _character,
+                        onChanged: (SingingCharacter? value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: const Text('Puncher'),
+                      leading: Radio<SingingCharacter>(
+                        value: SingingCharacter.puncher,
+                        groupValue: _character,
+                        onChanged: (SingingCharacter? value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 24.0),
+                Text(
+                  'Enter KM',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _kmController,
+                  focusNode: widget.kmFocusNode,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  inputAction: TextInputAction.next,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'Enter KM',
+                  hint: 'Enter KM',
+                ),
+                SizedBox(height: 24.0),
+
+                Text(
+                  'Enter Amount',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _tyreCareamtController,
+                  focusNode: widget.tyreCareamtFocusNode,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  inputAction: TextInputAction.done,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'Enter Amount',
+                  hint: 'Enter Enter Amount',
+                ),
+                SizedBox(height: 24.0),
+
+                Text(
+                  'Enter Location',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _locationController,
+                  focusNode: widget.tyreCareamtFocusNode,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  inputAction: TextInputAction.done,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'Enter Location',
+                  hint: 'Enter Location',
+                ),
+                SizedBox(height: 24.0),
+
+                Text(
+                  'Notes',
+                  style: TextStyle(
+                    color: CustomColors.firebaseGrey,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  maxLines: 10,
+                  isLabelEnabled: false,
+                  controller: _notesController,
+                  focusNode: widget.notesFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.done,
+                  label: 'Notes',
+                  hint: 'Notes',
+                  validator: (String value) {  },
+                ),
+                SizedBox(height: 24.0),
               ],
             ),
           ),
@@ -87,21 +243,19 @@ class _AddtyrecareFormState extends State<AddtyrecareForm> {
               ),
               onPressed: () async {
                 widget.titleFocusNode.unfocus();
-                widget.descriptionFocusNode.unfocus();
 
                 if (_AddtyrecareFormKey.currentState!.validate()) {
                   setState(() {
                     _isProcessing = true;
                   });
 
-                  await Database.addItem(
-                    title: _titleController.text,
+                  await Database.addTyreCareItem(
                     km: _kmController.text,
-                    fuelamt: _fuelamtController.text,
-                    fuelpl: _fuelplController.text,
-                    location: _locationController.text,
+                    expenseamt: _tyreCareamtController.text,
                     notes: _notesController.text,
-                    description: _descriptionController.text,
+                    location: _locationController.text,
+                    selecttype: _character.toString(),
+                    vehiclename: _titleController.text,
 
                   );
 

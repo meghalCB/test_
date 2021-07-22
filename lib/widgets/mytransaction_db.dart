@@ -8,7 +8,7 @@ class ItemTransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Database.readItems(),
+      stream: Database.readTransactions(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Text('Something went wrong');
@@ -19,9 +19,9 @@ class ItemTransactionList extends StatelessWidget {
             itemBuilder: (context, index) {
               var noteInfo = snapshot.data!.docs[index].data()!;
               String docID = snapshot.data!.docs[index].id;
-              String title = noteInfo['title'];
-              String fuelamt = noteInfo['fuelamt'];
-              String description = noteInfo['description'];
+              String vehiclename = noteInfo['vehiclename'];
+              String expenseamt = noteInfo['expenseamt'];
+              String expensetype = noteInfo['expensetype'];
 
               return Ink(
                 decoration: BoxDecoration(
@@ -42,18 +42,18 @@ class ItemTransactionList extends StatelessWidget {
                     ),
                   ),*/
                   title: Text(
-                    title,
+                    vehiclename,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   trailing: Wrap(
                     children: <Widget>[
                       // Icon()
-                      Text('\u{20B9} '+ fuelamt)
+                      Text('\u{20B9} '+ expenseamt)
                     ],
                   ),
                   subtitle: Text(
-                    fuelamt,
+                    expensetype,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

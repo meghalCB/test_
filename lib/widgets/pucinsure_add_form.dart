@@ -241,7 +241,7 @@ class _pucinsureItemFormState extends State<pucinsureItemForm> {
                     vehiclename: _titleController.text,
                     km: _kmController.text,
                     selecttype: 'puc',
-                    pucinsureamt: _pucinsureamtController.text,
+                    expenseamt: _pucinsureamtController.text,
                     companyname: _companynameController.text,
                     notes: _notesController.text,
 

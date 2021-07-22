@@ -94,7 +94,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             padding: const EdgeInsets.only(top: 40.0),
             child: Container(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -109,30 +109,31 @@ class _HomeDrawerState extends State<HomeDrawer> {
                                   .value /
                               360),
                           child: Container(
-                            height: 120,
-                            width: 120,
+                            height: 60,
+                            width: 60,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               boxShadow: <BoxShadow>[
                                 BoxShadow(color: AppTheme.grey.withOpacity(0.6), offset: const Offset(2.0, 4.0), blurRadius: 8),
                               ],
                             ),
-                            child: ClipRRect(
+                            /*child: ClipRRect(
                               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
                               child: Image.asset('assets/images/userImage.png'),
-                            ),
+                            ),*/
                           ),
                         ),
                       );
                     },
                   ),
+                  SizedBox(width: 20,),
                   Padding(
-                    padding: const EdgeInsets.only(top: 8, left: 4),
+                    padding: const EdgeInsets.only(top: 25, left: 4),
                     child: Text('${widget.userName}',//'User Name',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: AppTheme.grey,
-                        fontSize: 18,
+                        fontSize: 21,
                       ),
                     ),
                   ),
@@ -141,7 +142,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             ),
           ),
           const SizedBox(
-            height: 4,
+            height: 20,
           ),
           Divider(
             height: 1,

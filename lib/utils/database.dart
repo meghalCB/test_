@@ -10,9 +10,10 @@ class Database {
   static String? userName;
 
   static Future<void> addItem({
-    required String title,
+    String expensetype = 'Fuel',
+    required String vehiclename,
     required String km,
-    required String fuelamt,
+    required String expenseamt,
     required String fuelpl,
     required String location,
     required String notes,
@@ -20,21 +21,22 @@ class Database {
 
   }) async {
     DocumentReference documentReferencer =
-        _mainCollection.doc(userUid).collection('items').doc();
+        _mainCollection.doc(userUid).collection('Transaction').doc();
 
     Map<String, dynamic> data = <String, dynamic>{
-      "title": title,
+      "vehiclename": vehiclename,
       "km": km,
-      "fuelamt": fuelamt,
+      "expenseamt": expenseamt,
       "fuelpl": fuelpl,
       "location": location,
       "notes": notes,
       "description": description,
+      "expensetype": expensetype,
     };
 
     await documentReferencer
         .set(data)
-        .whenComplete(() => print("Note item added to the database"))
+        .whenComplete(() => print("Fuel added to the database"))
         .catchError((e) => print(e));
   }
 
@@ -44,21 +46,22 @@ class Database {
     required String vehiclename,
     required bool parttype,
     required String km,
-    required String repairamt,
+    required String expenseamt,
     required String location,
     required String partnamenotes,
 
   }) async {
     DocumentReference documentReferencer =
-    _mainCollection.doc(userUid).collection(expensetype).doc();
+    _mainCollection.doc(userUid).collection('Transaction').doc();
 
     Map<String, dynamic> data = <String, dynamic>{
       "vehiclename": vehiclename,
       "parttype": parttype,
       "km": km,
-      "repairamt": repairamt,
+      "expenseamt": expenseamt,
       "location": location,
       "partnamenotes": partnamenotes,
+      "expensetype": expensetype,
     };
 
     await documentReferencer
@@ -71,20 +74,21 @@ class Database {
     String expensetype = 'Service',
     required String vehiclename,
     required String km,
-    required String serviceamt,
+    required String expenseamt,
     required String location,
     required String notes,
 
   }) async {
     DocumentReference documentReferencer =
-    _mainCollection.doc(userUid).collection(expensetype).doc();
+    _mainCollection.doc(userUid).collection('Transaction').doc();
 
     Map<String, dynamic> data = <String, dynamic>{
       "vehiclename": vehiclename,
       "km": km,
-      "repairamt": serviceamt,
+      "expenseamt": expenseamt,
       "location": location,
       "partnamenotes": notes,
+      "expensetype": expensetype,
     };
 
     await documentReferencer
@@ -98,22 +102,51 @@ class Database {
     required String vehiclename,
     required String selecttype,
     required String km,
-    required String pucinsureamt,
+    required String expenseamt,
     required String companyname,
     required String expdate,
     required String notes,
 
   }) async {
     DocumentReference documentReferencer =
-    _mainCollection.doc(userUid).collection(expensetype).doc();
+    _mainCollection.doc(userUid).collection('Transaction').doc();
 
     Map<String, dynamic> data = <String, dynamic>{
       "vehiclename": vehiclename,
       "km": km,
       "expdate": expdate,
-      "pucinsureamt": pucinsureamt,
+      "expenseamt": expenseamt,
       "companyname": companyname,
       "partnamenotes": notes,
+      "expensetype": expensetype,
+    };
+
+    await documentReferencer
+        .set(data)
+        .whenComplete(() => print("Puc / Insurance items added to the database"))
+        .catchError((e) => print(e));
+  }
+
+  static Future<void> addTyreCareItem({
+    String expensetype = 'Tyre Care',
+    required String vehiclename,
+    required String selecttype,
+    required String km,
+    required String expenseamt,
+    required String location,
+    required String notes,
+
+  }) async {
+    DocumentReference documentReferencer =
+    _mainCollection.doc(userUid).collection('Transaction').doc();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      "vehiclename": vehiclename,
+      "km": km,
+      "expenseamt": expenseamt,
+      "location": location,
+      "partnamenotes": notes,
+      "expensetype": expensetype,
     };
 
     await documentReferencer
@@ -155,9 +188,9 @@ class Database {
 
 
   static Future<void> updateItem({
-    required String title,
+    required String vehiclename,
     required String km,
-    required String fuelamt,
+    required String expenseamt,
     required String fuelpl,
     required String location,
     required String notes,
@@ -168,9 +201,9 @@ class Database {
         _mainCollection.doc(userUid).collection('items').doc(docId);
 
     Map<String, dynamic> data = <String, dynamic>{
-      "title": title,
+      "vehiclename": vehiclename,
       "km": km,
-      "fuelamt": fuelamt,
+      "expenseamt": expenseamt,
       "fuelpl": fuelpl,
       "location": location,
       "notes": notes,
@@ -240,6 +273,13 @@ class Database {
     return notesItemCollection.snapshots();
   }
 
+  static Stream<QuerySnapshot> readTransactions() {
+    CollectionReference notesItemCollection =
+        _mainCollection.doc(userUid).collection('Transaction');
+
+    return notesItemCollection.snapshots();
+  }
+
   static Stream<QuerySnapshot> getusername() {
     CollectionReference notesItemCollection =
     _mainCollection.doc(userUid).collection('items');
@@ -247,17 +287,13 @@ class Database {
     return notesItemCollection.snapshots();
   }
 
-  static Stream<QuerySnapshot> getvehiclename() {
-    CollectionReference notesItemCollection =
-    _mainCollection.doc(userUid).collection('MY Vehicle');
-
-    return notesItemCollection.snapshots();
-  }
 
   static Stream<QuerySnapshot> readVehicleItems() {
     CollectionReference notesVehicleItemCollection =
     _mainCollection.doc(userUid).collection('MY Vehicle');
 
+    // FirebaseFirestore.instance.collection('products').where('productType', whereIn: <String>['product1', 'product2']);
+    
     return notesVehicleItemCollection.snapshots();
   }
 

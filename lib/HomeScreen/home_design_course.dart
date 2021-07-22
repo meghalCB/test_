@@ -41,6 +41,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                   child: Column(
                     children: <Widget>[
                       // getSearchBarUI(),
+                      getTotalExpeUI(),
                       getCategoryUI(),
                       Flexible(
                         child: getPopularCourseUI(),
@@ -52,6 +53,39 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget getTotalExpeUI(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 18.0, left: 18, right: 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+              'Total Expense',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 22,
+                letterSpacing: 0.27,
+                color: DesignCourseAppTheme.darkerText,
+              ),
+            ),
+
+          const SizedBox(
+            height: 16,
+          ),
+          Container(
+            width: double.infinity,
+            height: 50,
+            child: Text('\u20B9',
+              style: TextStyle(fontSize: 21),
+            ),
+          )
+        ],
       ),
     );
   }

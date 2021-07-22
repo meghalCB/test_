@@ -238,7 +238,7 @@ class _AddRepairFormState extends State<AddRepairForm> {
                     vehiclename: _titleController.text,
                     parttype: isSwitched,
                     km: _kmController.text,
-                    repairamt: _fuelamtController.text,
+                    expenseamt: _fuelamtController.text,
                     location: _locationController.text,
                     partnamenotes: _notesController.text,
 

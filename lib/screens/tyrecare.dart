@@ -8,7 +8,7 @@ class TyreScreen extends StatelessWidget {
   final FocusNode _titleFocusNode = FocusNode();
   final FocusNode _descriptionFocusNode = FocusNode();
   final FocusNode _kmFocusNode = FocusNode();
-  final FocusNode _fuelamtFocusNode = FocusNode();
+  final FocusNode _tyreCareamtFocusNode = FocusNode();
   final FocusNode _fuelplFocusNode = FocusNode();
   final FocusNode _locationFocusNode = FocusNode();
   final FocusNode _notesFocusNode = FocusNode();
@@ -20,7 +20,7 @@ class TyreScreen extends StatelessWidget {
       onTap: () {
         _titleFocusNode.unfocus();
         _descriptionFocusNode.unfocus();
-        _fuelamtFocusNode.unfocus();
+        _tyreCareamtFocusNode.unfocus();
         _fuelplFocusNode.unfocus();
         _locationFocusNode.unfocus();
         _notesFocusNode.unfocus();
@@ -45,8 +45,7 @@ class TyreScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: AddtyrecareForm(
                 titleFocusNode: _titleFocusNode,
-                descriptionFocusNode: _descriptionFocusNode,
-                fuelamtFocusNode: _fuelamtFocusNode,
+                tyreCareamtFocusNode: _tyreCareamtFocusNode,
                 fuelplFocusNode: _fuelplFocusNode,
                 locationFocusNode: _locationFocusNode,
                 notesFocusNode: _notesFocusNode,

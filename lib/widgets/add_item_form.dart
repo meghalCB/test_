@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutterfire_samples/Dropdown/customdropdown.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/utils/database.dart';
 import 'package:flutterfire_samples/utils/validator.dart';
 
 import 'custom_form_field.dart';
+
 
 class AddItemForm extends StatefulWidget {
   final FocusNode titleFocusNode;
@@ -28,6 +30,7 @@ class AddItemForm extends StatefulWidget {
   _AddItemFormState createState() => _AddItemFormState();
 }
 
+
 class _AddItemFormState extends State<AddItemForm> {
   final _addItemFormKey = GlobalKey<FormState>();
 
@@ -40,6 +43,14 @@ class _AddItemFormState extends State<AddItemForm> {
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+
+  var selectedCurrency, selectedType;
+  List<String> _accountType = <String>[
+    'Savings',
+    'Deposit',
+    'Checking',
+    'Brokerage'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +68,7 @@ class _AddItemFormState extends State<AddItemForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 24.0),
+
                 Text(
                   'Add Fuel For',
                   style: TextStyle(
@@ -67,7 +79,8 @@ class _AddItemFormState extends State<AddItemForm> {
                   ),
                 ),
                 SizedBox(height: 8.0),
-                CustomFormField(
+                MyHomePage(),
+                /*CustomFormField(
                   isLabelEnabled: false,
                   controller: _titleController,
                   focusNode: widget.titleFocusNode,
@@ -78,7 +91,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   ),
                   label: 'Add Fuel For',
                   hint: 'Enter Fuel For',
-                ),
+                ),*/
                 SizedBox(height: 24.0),
                 Text(
                   'Enter KM',
@@ -194,11 +207,9 @@ class _AddItemFormState extends State<AddItemForm> {
                   focusNode: widget.notesFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.done,
-                  validator: (value) => Validator.validateField(
-                    value: value,
-                  ),
                   label: 'Notes',
                   hint: 'Notes',
+                  validator: (String value) {  },
                 ),
                 SizedBox(height: 24.0),
 
@@ -237,9 +248,9 @@ class _AddItemFormState extends State<AddItemForm> {
                         });
 
                         await Database.addItem(
-                          title: _titleController.text,
+                          vehiclename: _titleController.text,
                           km: _kmController.text,
-                          fuelamt: _fuelamtController.text,
+                          expenseamt: _fuelamtController.text,
                           fuelpl: _fuelplController.text,
                           location: _locationController.text,
                           notes: _notesController.text,

@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
 
     User? user = FirebaseAuth.instance.currentUser;
 
-    if (user != null) {
+    if (user != null && Database.userUid! != '') {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => NavigationHomeScreen(user: user,),
@@ -61,195 +61,197 @@ class _LoginPageState extends State<LoginPage> {
             if (snapshot.connectionState == ConnectionState.done) {
               return Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(fontWeight: FontWeight.w800,fontSize: 45),
+                child: SingleChildScrollView(
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Login',
+                          style: TextStyle(fontWeight: FontWeight.w800,fontSize: 45),
+                        ),
                       ),
-                    ),
-                    Text('Fill the form to log in',
-                      style: TextStyle(fontWeight: FontWeight.w800,fontSize: 25),
-                    ),
-                    SizedBox(height: 100.0,),
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            controller: _emailTextController,
-                            focusNode: _focusEmail,
-                            validator: (value) => Validator.validateEmail(
-                              email: value,
-                            ),
-                            decoration: InputDecoration(
-                              hintText: "Email",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
+                      Text('Fill the form to log in',
+                        style: TextStyle(fontWeight: FontWeight.w800,fontSize: 25),
+                      ),
+                      SizedBox(height: 100.0,),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: <Widget>[
+                            TextFormField(
+                              controller: _emailTextController,
+                              focusNode: _focusEmail,
+                              validator: (value) => Validator.validateEmail(
+                                email: value,
+                              ),
+                              decoration: InputDecoration(
+                                hintText: "Email",
+                                errorBorder: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 8.0),
-                          TextFormField(
-                            controller: _passwordTextController,
-                            focusNode: _focusPassword,
-                            obscureText: true,
-                            validator: (value) => Validator.validatePassword(
-                              password: value,
-                            ),
-                            decoration: InputDecoration(
-                              hintText: "Password",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
+                            SizedBox(height: 8.0),
+                            TextFormField(
+                              controller: _passwordTextController,
+                              focusNode: _focusPassword,
+                              obscureText: true,
+                              validator: (value) => Validator.validatePassword(
+                                password: value,
+                              ),
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                errorBorder: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 24.0),
-                          _isProcessing
-                              ? CircularProgressIndicator()
-                              : Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all(
-                                            CustomColors.firebaseOrange,
-                                          ),
-                                          shape: MaterialStateProperty.all(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                            SizedBox(height: 24.0),
+                            _isProcessing
+                                ? CircularProgressIndicator()
+                                : Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all(
+                                              CustomColors.firebaseOrange,
+                                            ),
+                                            shape: MaterialStateProperty.all(
+                                              RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(10),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        onPressed: () async {
-                                          _focusEmail.unfocus();
-                                          _focusPassword.unfocus();
+                                          onPressed: () async {
+                                            _focusEmail.unfocus();
+                                            _focusPassword.unfocus();
 
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            setState(() {
-                                              _isProcessing = true;
-                                            });
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              setState(() {
+                                                _isProcessing = true;
+                                              });
 
-                                            User? user = await FireAuth
-                                                .signInUsingEmailPassword(
-                                              email: _emailTextController.text,
-                                              password:
-                                                  _passwordTextController.text,
-                                            );
-
-                                            setState(() {
-                                              _isProcessing = false;
-                                            });
-
-                                            if (user != null) {
-                                              Database.userUid = _emailTextController.text;
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                  NavigationHomeScreen(user: user,),
-                                                ),
+                                              User? user = await FireAuth
+                                                  .signInUsingEmailPassword(
+                                                email: _emailTextController.text,
+                                                password:
+                                                    _passwordTextController.text,
                                               );
+
+                                              setState(() {
+                                                _isProcessing = false;
+                                              });
+
+                                              if (user != null) {
+                                                Database.userUid = _emailTextController.text;
+                                                Navigator.of(context)
+                                                    .pushReplacement(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                    NavigationHomeScreen(user: user,),
+                                                  ),
+                                                );
+                                              }
                                             }
-                                          }
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-                                          child: Text(
-                                            'Sign In',
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
-                                              color: CustomColors.firebaseGrey,
-                                              letterSpacing: 2,
+                                          },
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                                            child: Text(
+                                              'Sign In',
+                                              style: TextStyle(
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold,
+                                                color: CustomColors.firebaseGrey,
+                                                letterSpacing: 2,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                          SizedBox(height: 35.0),
+                                    ],
+                                  ),
+                            SizedBox(height: 35.0),
 
-                          /*ElevatedButton(
+                            /*ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          RegisterPage(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Register',
+                                  style: TextStyle(color: Colors.white,),
+                                ),
+                              ),*/
+                          ],
+                        ),
+                      ),
+                      Align(
+                        alignment: FractionalOffset.bottomCenter,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text('Don\'t have account yet?'),
+                            SizedBox(width: 8.0),
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  CustomColors.firebaseOrange,
+                                ),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ),
                               onPressed: () {
-                                Navigator.of(context).push(
+                                // widget.focusNode.unfocus();
+
+                                /*if (_loginInFormKey.currentState!.validate()) {
+                                        Database.userUid = _uidController.text;*/
+
+                                Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        RegisterPage(),
+                                    builder: (context) => RegisterPage() ,//NavigationHomeScreen(user: user,)
                                   ),
                                 );
+                                // }
                               },
-                              child: Text(
-                                'Register',
-                                style: TextStyle(color: Colors.white,),
-                              ),
-                            ),*/
-                        ],
-                      ),
-                    ),
-                    Align(
-                      alignment: FractionalOffset.bottomCenter,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text('Don\'t have account yet?'),
-                          SizedBox(width: 8.0),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                CustomColors.firebaseOrange,
-                              ),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                                child: Text(
+                                  'Register',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: CustomColors.firebaseGrey,
+                                    letterSpacing: 2,
+                                  ),
                                 ),
                               ),
                             ),
-                            onPressed: () {
-                              // widget.focusNode.unfocus();
-
-                              /*if (_loginInFormKey.currentState!.validate()) {
-                                      Database.userUid = _uidController.text;*/
-
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => RegisterPage() ,//NavigationHomeScreen(user: user,)
-                                ),
-                              );
-                              // }
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                              child: Text(
-                                'Register',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: CustomColors.firebaseGrey,
-                                  letterSpacing: 2,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
 
+                  ),
                 ),
               );
             }

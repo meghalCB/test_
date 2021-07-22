@@ -211,7 +211,7 @@ class _ServiceItemFormState extends State<ServiceItemForm> {
 
                     vehiclename: _titleController.text,
                     km: _kmController.text,
-                    serviceamt: _serviceamtController.text,
+                    expenseamt: _serviceamtController.text,
                     location: _locationController.text,
                     notes: _notesController.text,
                   );

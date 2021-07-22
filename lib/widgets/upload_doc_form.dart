@@ -237,9 +237,9 @@ class _AddItemFormState extends State<AddItemForm> {
                   });
 
                   await Database.addItem(
-                    title: _titleController.text,
+                    vehiclename: _titleController.text,
                     km: _kmController.text,
-                    fuelamt: _fuelamtController.text,
+                    expenseamt: _fuelamtController.text,
                     fuelpl: _fuelplController.text,
                     location: _locationController.text,
                     notes: _notesController.text,
