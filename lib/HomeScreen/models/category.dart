@@ -9,6 +9,7 @@ class Category {
     this.total_expense = 0,
     this.rating = 0.0,
     this.navigteto = '',
+    this.dbname = '',
     this.colors = Colors.red,
 
   });
@@ -21,6 +22,7 @@ class Category {
   String imagePath;
   String navigteto;
   Color colors;
+  String dbname;
 
   static List<Category> categoryList = <Category>[
     Category(
@@ -79,6 +81,7 @@ class Category {
     Category(
       imagePath: 'assets/design_course/interFace3.png',
       title: 'Total Fuel',
+      dbname: 'Fuel',
       lessonCount: 12,
       money: 25,
       total_expense: 20000,
@@ -89,6 +92,7 @@ class Category {
     Category(
       imagePath: 'assets/design_course/interFace4.png',
       title: 'Total Service',
+      dbname: 'Service',
       lessonCount: 28,
       money: 208,
       total_expense: 20000,
@@ -99,6 +103,7 @@ class Category {
     Category(
       imagePath: 'assets/design_course/interFace3.png',
       title: 'Total Repair',
+      dbname: 'Repair',
       lessonCount: 12,
       money: 25,
       total_expense: 20000,
@@ -109,6 +114,7 @@ class Category {
     Category(
       imagePath: 'assets/design_course/interFace4.png',
       title: 'PUC / Insurance',
+      dbname: 'puc Insurance',
       lessonCount: 28,
       money: 208,
       total_expense: 20000,
@@ -119,6 +125,7 @@ class Category {
     Category(
       imagePath: 'assets/design_course/interFace4.png',
       title: 'Tyre Care',
+      dbname: 'Tyre Care',
       lessonCount: 28,
       money: 188,
       total_expense: 20000,

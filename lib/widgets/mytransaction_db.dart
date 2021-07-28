@@ -20,7 +20,7 @@ class ItemTransactionList extends StatelessWidget {
               var noteInfo = snapshot.data!.docs[index].data()!;
               String docID = snapshot.data!.docs[index].id;
               String vehiclename = noteInfo['vehiclename'];
-              String expenseamt = noteInfo['expenseamt'];
+              int expenseamt = noteInfo['expenseamt'];
               String expensetype = noteInfo['expensetype'];
 
               return Ink(
@@ -49,7 +49,7 @@ class ItemTransactionList extends StatelessWidget {
                   trailing: Wrap(
                     children: <Widget>[
                       // Icon()
-                      Text('\u{20B9} '+ expenseamt)
+                      Text('\u{20B9} '+ expenseamt.toString())
                     ],
                   ),
                   subtitle: Text(

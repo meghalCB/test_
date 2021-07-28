@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/HomeScreen/popular_course_list_view.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
@@ -6,7 +7,9 @@ import 'package:flutterfire_samples/screens/mytransaction_list.dart';
 import 'package:flutterfire_samples/screens/repair_add_scrren.dart';
 import 'package:flutterfire_samples/screens/service_add_scrren.dart';
 import 'package:flutterfire_samples/screens/upload_doc.dart';
+import 'package:flutterfire_samples/utils/database.dart';
 import 'package:flutterfire_samples/widgets/app_bar_title.dart';
+import 'package:flutterfire_samples/widgets/gettotalexp.dart';
 import 'category_list_view.dart';
 import 'course_info_screen.dart';
 import 'design_course_app_theme.dart';
@@ -41,6 +44,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                   child: Column(
                     children: <Widget>[
                       // getSearchBarUI(),
+
                       getTotalExpeUI(),
                       getCategoryUI(),
                       Flexible(
@@ -60,32 +64,44 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
   Widget getTotalExpeUI(){
     return Padding(
       padding: const EdgeInsets.only(top: 18.0, left: 18, right: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-              'Total Expense',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 22,
-                letterSpacing: 0.27,
-                color: DesignCourseAppTheme.darkerText,
+      child: Container(
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(11),
+            side: BorderSide(
+              color: Colors.grey.withOpacity(.2),
+              width: 1,
+            ),
+          ),
+          color: DesignCourseAppTheme.nearlyWhite,
+          child: InkWell(
+            splashColor: Colors.transparent,
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                      'Total Expense',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 22,
+                        letterSpacing: 0.27,
+                        color: DesignCourseAppTheme.darkerText,
+                      ),
+                    ),
+
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  GetTotalExp(),
+                ],
               ),
             ),
-
-          const SizedBox(
-            height: 16,
           ),
-          Container(
-            width: double.infinity,
-            height: 50,
-            child: Text('\u20B9',
-              style: TextStyle(fontSize: 21),
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
@@ -350,3 +366,4 @@ enum CategoryType {
   coding,
   basic,
 }
+

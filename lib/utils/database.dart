@@ -26,7 +26,7 @@ class Database {
     Map<String, dynamic> data = <String, dynamic>{
       "vehiclename": vehiclename,
       "km": km,
-      "expenseamt": expenseamt,
+      "expenseamt": int.parse(expenseamt),
       "fuelpl": fuelpl,
       "location": location,
       "notes": notes,
@@ -58,7 +58,7 @@ class Database {
       "vehiclename": vehiclename,
       "parttype": parttype,
       "km": km,
-      "expenseamt": expenseamt,
+      "expenseamt": int.parse(expenseamt),
       "location": location,
       "partnamenotes": partnamenotes,
       "expensetype": expensetype,
@@ -85,7 +85,7 @@ class Database {
     Map<String, dynamic> data = <String, dynamic>{
       "vehiclename": vehiclename,
       "km": km,
-      "expenseamt": expenseamt,
+      "expenseamt": int.parse(expenseamt),
       "location": location,
       "partnamenotes": notes,
       "expensetype": expensetype,
@@ -115,7 +115,7 @@ class Database {
       "vehiclename": vehiclename,
       "km": km,
       "expdate": expdate,
-      "expenseamt": expenseamt,
+      "expenseamt": int.parse(expenseamt),
       "companyname": companyname,
       "partnamenotes": notes,
       "expensetype": expensetype,
@@ -143,7 +143,7 @@ class Database {
     Map<String, dynamic> data = <String, dynamic>{
       "vehiclename": vehiclename,
       "km": km,
-      "expenseamt": expenseamt,
+      "expenseamt": int.parse(expenseamt),
       "location": location,
       "partnamenotes": notes,
       "expensetype": expensetype,
@@ -174,7 +174,7 @@ class Database {
     "brandname": brandname,
     "modelname": modelname,
     "vehiclenum": vehiclenum,
-    "km": km,
+    "km": int.parse(km),
     "puc": puc,
     "insurance": insurance,
     };
@@ -203,7 +203,7 @@ class Database {
     Map<String, dynamic> data = <String, dynamic>{
       "vehiclename": vehiclename,
       "km": km,
-      "expenseamt": expenseamt,
+      "expenseamt": int.parse(expenseamt),
       "fuelpl": fuelpl,
       "location": location,
       "notes": notes,
@@ -296,6 +296,16 @@ class Database {
     
     return notesVehicleItemCollection.snapshots();
   }
+
+  static Stream<QuerySnapshot> readTotal() {
+    Query notesVehicleItemCollection =
+    _mainCollection.doc(userUid).collection('Transaction').where('productType', whereIn: <String>['product1', 'product2']);
+
+    // FirebaseFirestore.instance.collection('products').where('productType', whereIn: <String>['product1', 'product2']);
+
+    return notesVehicleItemCollection.snapshots();
+  }
+
 
   static Stream<QuerySnapshot> readDocumentItems() {
     CollectionReference notesDocumentItemCollection =

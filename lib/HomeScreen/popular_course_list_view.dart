@@ -1,6 +1,8 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
+import 'package:flutterfire_samples/utils/database.dart';
 
 import 'category_list_view.dart';
 import 'design_course_app_theme.dart';
@@ -30,6 +32,12 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
   }
 
   @override
+  void dispose() {
+    animationController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
@@ -41,7 +49,10 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
             if (!snapshot.hasData) {
               return const SizedBox();
             } else {
-              return GridView(
+
+
+
+             return GridView(
                 padding: const EdgeInsets.all(8),
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
@@ -95,6 +106,27 @@ class CategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    int sum = 0;
+    int totalfuel = 0;
+    /*FirebaseFirestore.instance.collection('notes')
+        .doc(Database.userUid).collection('Transaction').where("expensetype", isEqualTo: "${category!.dbname}").get()
+        .then((querySnapshot){
+      querySnapshot.docs.forEach((result) {
+        // print(result.get('expenseamt'));
+        sum += result.get('expenseamt') as int;
+      });
+      totalfuel = sum;
+    });
+    print(totalfuel);*/
+    /*FirebaseFirestore.instance.collection('notes')
+                 .doc(Database.userUid).collection('Transaction').where("expensetype", isEqualTo: "Repair")
+                 .snapshots().forEach(
+                     (data) => print(total+=data.docs[0]['expenseamt'] as int)
+             );*/
+
+
+
     return AnimatedBuilder(
       animation: animationController!,
       builder: (BuildContext context, Widget? child) {
@@ -151,8 +183,45 @@ class CategoryView extends StatelessWidget {
                                                 left: 16,
                                                 right: 16,
                                                 bottom: 8),
-                                            child: Text(
-                                              '\u20B9${category!.total_expense}',
+                                            child: StreamBuilder<QuerySnapshot>(
+                                                stream: FirebaseFirestore.instance.collection('notes')
+                                                    .doc(Database.userUid).collection('Transaction').where("expensetype", isEqualTo: "${category!.dbname}")
+                                                    .snapshots(),
+                                                builder: (context, snapshot) {
+                                                  if (snapshot.hasError) {
+                                                    return Text('Something went wrong');
+                                                  } else if (snapshot.hasData || snapshot.data != null) {
+                                                    int total = 0;
+                                                    var totalIncome = 0;
+                                                    snapshot.data!.docs.forEach((element) {
+                                                      total+=(element.data()?['expenseamt']) as int;
+                                                      // print(element.data());
+                                                    });
+                                                    totalIncome = total;
+                                                    print(totalIncome);
+
+                                                    return Text('\u20B9'+totalIncome.toString(),
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        fontWeight: FontWeight.w900,
+                                                        fontSize: 21,
+                                                        letterSpacing: 0.27,
+                                                        color: category!.colors,
+                                                      ),);
+
+                                                  }
+                                                  return Center(
+                                                    child: CircularProgressIndicator(
+                                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                                        CustomColors.firebaseOrange,
+                                                      ),
+                                                    ),
+                                                  );
+
+                                                }),
+
+                                            /*Text(
+                                              '\u20B9$totalfuel',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w900,
@@ -160,7 +229,7 @@ class CategoryView extends StatelessWidget {
                                                 letterSpacing: 0.27,
                                                 color: category!.colors,
                                               ),
-                                            ),
+                                            ),*/
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(

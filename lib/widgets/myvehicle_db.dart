@@ -8,11 +8,20 @@ class ItemVehicleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Database.readVehicleItems(),
+      stream: Database.readVehicleItems(),//readVehicleItems
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Text('Something went wrong');
         } else if (snapshot.hasData || snapshot.data != null) {
+          int total = 0;
+          var totalIncome = 0;
+          snapshot.data!.docs.forEach((element) {
+            total+=(element.data()?['km']) as int;
+            // print(element.data());
+          });
+          totalIncome = total;
+          print(totalIncome);
+
           return ListView.separated(
             separatorBuilder: (context, index) => SizedBox(height: 16.0),
             itemCount: snapshot.data!.docs.length,
@@ -23,6 +32,7 @@ class ItemVehicleList extends StatelessWidget {
               String modelname = noteInfo['modelname'];
               String vehiclenum = noteInfo['vehiclenum'];
               String km = noteInfo['km'];
+
 
               return Ink(
                 decoration: BoxDecoration(
