@@ -11,6 +11,7 @@ class Category {
     this.navigteto = '',
     this.dbname = '',
     this.colors = Colors.red,
+    this.expicon = Icons.widgets_rounded,
 
   });
 
@@ -23,6 +24,7 @@ class Category {
   String navigteto;
   Color colors;
   String dbname;
+  IconData expicon;
 
   static List<Category> categoryList = <Category>[
     Category(
@@ -34,6 +36,7 @@ class Category {
       rating: 4.3,
       navigteto: 'add_screen',
       colors: Colors.pinkAccent.shade100,
+      expicon: Icons.local_gas_station_rounded
     ),
     Category(
       imagePath: 'assets/design_course/interFace2.png',
@@ -44,6 +47,7 @@ class Category {
       rating: 4.6,
       navigteto: 'add_screen',
       colors: Colors.green,
+        expicon: Icons.car_repair_rounded,
     ),
     Category(
       imagePath: 'assets/design_course/interFace1.png',
@@ -54,6 +58,7 @@ class Category {
       rating: 4.3,
       navigteto: 'add_screen',
       colors: Colors.indigo.shade600,
+        expicon: Icons.design_services_rounded
     ),
     Category(
       imagePath: 'assets/design_course/interFace2.png',
@@ -64,6 +69,7 @@ class Category {
       rating: 4.6,
       navigteto: 'add_screen',
       colors: Colors.orange.shade300,
+        expicon: Icons.event_note_rounded
     ),
     Category(
       imagePath: 'assets/design_course/interFace2.png',
@@ -74,6 +80,7 @@ class Category {
       rating: 4.6,
       navigteto: 'add_screen',
       colors: Colors.white30,
+        expicon: Icons.settings
     ),
   ];
 

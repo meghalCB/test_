@@ -31,7 +31,7 @@ class ItemVehicleList extends StatelessWidget {
               String brandname = noteInfo['brandname'];
               String modelname = noteInfo['modelname'];
               String vehiclenum = noteInfo['vehiclenum'];
-              String km = noteInfo['km'];
+              int km = noteInfo['km'];
 
 
               return Ink(
@@ -94,7 +94,7 @@ class ItemVehicleList extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
                           child: Text(
-                            km, style: TextStyle(fontSize: 21, fontWeight: FontWeight.w800,),
+                            km.toString(), style: TextStyle(fontSize: 21, fontWeight: FontWeight.w800,),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),

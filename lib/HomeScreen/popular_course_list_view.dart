@@ -50,8 +50,6 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
               return const SizedBox();
             } else {
 
-
-
              return GridView(
                 padding: const EdgeInsets.all(8),
                 physics: const BouncingScrollPhysics(),
@@ -79,7 +77,7 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
                   crossAxisCount: 2,
                   mainAxisSpacing: 25.0,
                   crossAxisSpacing: 25.0,
-                  childAspectRatio: 1.3,
+                  childAspectRatio: 1.2,
                 ),
               );
             }
@@ -146,7 +144,9 @@ class CategoryView extends StatelessWidget {
                     Container(
                       height: 130,
                       child: Column(
-                        children: <Widget>[
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(

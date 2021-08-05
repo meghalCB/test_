@@ -32,7 +32,7 @@ class AddDocumentScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: CustomColors.firebaseNavy,
-          title: getAppBarUI(''),
+          title: getAppBarUI('My Documents'),
         ),
         body: SizedBox(
           height: screenHeight - keyboardHeight,

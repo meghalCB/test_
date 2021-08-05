@@ -76,7 +76,9 @@ class _AddDocumentFormState extends State<AddDocumentForm> {
 
       try {
         // Uploading the selected image with some custom meta data
-        await storage.ref(fileName).putFile(
+
+
+        await storage.ref(Database.userUid).child(fileName).putFile(
             imageFile,
             SettableMetadata(customMetadata: {
               'uploaded_by': _docNameFocusNode.text,

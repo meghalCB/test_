@@ -12,7 +12,7 @@ Future<List<Map<String, dynamic>>> _loadImages() async {
   List<Map<String, dynamic>> files = [];
   FirebaseStorage storage = FirebaseStorage.instance;
 
-  final ListResult result = await storage.ref().list();
+  final ListResult result = await storage.ref(Database.userUid).list();
   final List<Reference> allFiles = result.items;
 
   await new Future.delayed(new Duration(seconds: 5));
@@ -36,49 +36,55 @@ class ItemDocumentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Expanded(
-      child: FutureBuilder(
-        future: _loadImages(),
-        builder: (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return ListView.builder(
-              itemCount: snapshot.data?.length ?? 0,
-              itemBuilder: (context, index) {
-                final Map<String, dynamic> image =
-                snapshot.data![index];
+    return Container(
+      child: Expanded(
+        child: FutureBuilder(
+          future: _loadImages(),
+          builder: (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return ListView.builder(
+                itemCount: snapshot.data?.length ?? 0,
+                itemBuilder: (context, index) {
+                  final Map<String, dynamic> image =
+                  snapshot.data![index];
 
-                print(Image.network(image['url']));
+                  // print(Image.network(image['url']));
 
-                return Card(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: ListTile(
-                    dense: false,
-                    leading: Image.network(image['url']),
-                    title: Text(image['uploaded_by']),
-                    subtitle: Text(image['description']),
-                    /*    trailing: IconButton(
-                                  onPressed: () => _delete(image['path']),
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  ),
-                                ),*/
-                  ),
-                );
-              },
-            );
-          }
+                  return Card(
+                    color: Colors.white12,
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    child: ListTile(
+                      leading: Image.network(image['url']),
+                      title: Text(image['uploaded_by']),
+                      subtitle: Text(image['description']),
+                      /*    trailing: IconButton(
+                                    onPressed: () => _delete(image['path']),
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                  ),*/
+                    ),
+                  );
+                },
+              );
+            }
 
-          return Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                CustomColors.firebaseOrange,
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  CustomColors.firebaseOrange,
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
+  }
+}
+
+
 
 /*    return StreamBuilder<QuerySnapshot>(
       stream: Database.readDocumentItems(),
@@ -168,8 +174,3 @@ class ItemDocumentList extends StatelessWidget {
         );
       },
     );*/
-  }
-}
-
-
-

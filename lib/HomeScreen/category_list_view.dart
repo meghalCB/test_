@@ -45,7 +45,7 @@ class _CategoryListViewState extends State<CategoryListView>
     return Padding(
       padding: const EdgeInsets.only(top: 16, bottom: 16),
       child: Container(
-        height: 134,
+        height: 100, //134
         width: double.infinity,
         child: FutureBuilder<bool>(
           future: getData(),
@@ -128,7 +128,7 @@ class CategoryView extends StatelessWidget {
                 }
               },//callback
               child: SizedBox(
-                width: 180,
+                width: 100,//180
                 child: Stack(
                   children: <Widget>[
                     Container(
@@ -155,17 +155,21 @@ class CategoryView extends StatelessWidget {
                                         children: <Widget>[
                                           Padding(
                                             padding:
-                                                const EdgeInsets.only(top: 21,left: 21,),
-                                            child: Text(
-                                              category!.title,
-                                              // textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 23,
-                                                letterSpacing: 0.27,
-                                                color: DesignCourseAppTheme
-                                                    .darkerText,
-                                              ),
+                                                const EdgeInsets.only(top: 21,),
+                                            child: Icon(
+                                                category!.expicon
+                                            ),
+                                          ),
+                                          SizedBox(height: 10,),
+                                          Text(
+                                            category!.title,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12,
+                                              letterSpacing: 0.27,
+                                              color: DesignCourseAppTheme
+                                                  .darkerText,
                                             ),
                                           ),
                                           const Expanded(
@@ -255,7 +259,7 @@ class CategoryView extends StatelessWidget {
                                                             Radius.circular(
                                                                 8.0)),
                                                   ),
-                                                  child: Padding(
+                                                  /*child: Padding(
                                                     padding:
                                                         const EdgeInsets.all(
                                                             4.0),
@@ -265,7 +269,7 @@ class CategoryView extends StatelessWidget {
                                                           DesignCourseAppTheme
                                                               .nearlyWhite,
                                                     ),
-                                                  ),
+                                                  ),*/
                                                 )
                                               ],
                                             ),
