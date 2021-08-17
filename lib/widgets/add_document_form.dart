@@ -31,6 +31,7 @@ class _AddDocumentFormState extends State<AddDocumentForm> {
   final _AddDocumentFormKey = GlobalKey<FormState>();
   SingingCharacter? _character;
   bool _isProcessing = false;
+  File? _imageFile ;
 
   final TextEditingController _docNameFocusNode = TextEditingController();
 
@@ -71,13 +72,22 @@ class _AddDocumentFormState extends State<AddDocumentForm> {
               : ImageSource.gallery,
           maxWidth: 1920);
 
+
+
+
+
       final String fileName = path.basename(pickedImage!.path);
       File imageFile = File(pickedImage.path);
 
+      setState(() {
+        _imageFile = imageFile;
+      });
+
+
+      print('imageFile' + imageFile.toString());
+
       try {
         // Uploading the selected image with some custom meta data
-
-
         await storage.ref(Database.userUid).child(fileName).putFile(
             imageFile,
             SettableMetadata(customMetadata: {
@@ -139,7 +149,8 @@ class _AddDocumentFormState extends State<AddDocumentForm> {
                 ),
                 SizedBox(height: 24.0),
 
-                Row(
+            _imageFile == null ?
+            Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton.icon(
@@ -151,7 +162,14 @@ class _AddDocumentFormState extends State<AddDocumentForm> {
                         icon: Icon(Icons.library_add),
                         label: Text('Gallery')),
                   ],
-                ),
+                )
+                 :
+                Container(
+                  child: Image.file(
+                    _imageFile!,
+                    fit: BoxFit.cover,
+                  ),
+                )
 
                 /*Expanded(
                   child: FutureBuilder(
@@ -222,8 +240,7 @@ class _AddDocumentFormState extends State<AddDocumentForm> {
                 CustomColors.firebaseOrange,
               ),
             ),
-          )
-              : Container(
+          ): Container(
             width: double.maxFinite,
             child: ElevatedButton(
               style: ButtonStyle(
@@ -280,3 +297,11 @@ class _AddDocumentFormState extends State<AddDocumentForm> {
   }
 
 }
+/*
+Widget _setImageView() {
+  if (imageFile != null) {
+    return Image.file(imageFile, width: 500, height: 500);
+  } else {
+    return Text("Please select an image");
+  }
+}*/

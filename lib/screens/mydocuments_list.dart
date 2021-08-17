@@ -1,5 +1,6 @@
 // @dart=2.7
 
+
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/add_screen.dart';
@@ -25,6 +26,7 @@ class _DocumentScreenState extends State<DocumentScreen> {
   final FocusNode _passwordFocusNode = FocusNode();
 
   FSBStatus _fsbStatus;
+
 
   @override
   Widget build(BuildContext context) {
