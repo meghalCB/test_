@@ -34,6 +34,7 @@ Future<List<Map<String, dynamic>>> _loadImages() async {
 }
 
 class ItemDocumentList extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
 
@@ -49,7 +50,7 @@ class ItemDocumentList extends StatelessWidget {
                   final Map<String, dynamic> image =
                   snapshot.data![index];
 
-                  // print(Image.network(image['url']));
+                  // print((image['url']));
 
                   return Card(
                     color: Colors.white12,
@@ -58,6 +59,48 @@ class ItemDocumentList extends StatelessWidget {
                       leading: Image.network(image['url']),
                       title: Text(image['uploaded_by']),
                       subtitle: Text(image['description']),
+                      onTap: () async {
+                        await showGeneralDialog(
+                            barrierColor: Colors.black.withOpacity(0.5),
+                            transitionBuilder: (context, a1, a2, widget) {
+                              return Transform.scale(
+                                scale: a1.value,
+                                child: Opacity(
+                                  opacity: a1.value,
+                                  child: AlertDialog(
+                                    shape: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(16.0)),
+                                    // title: Text('Hello!!'),
+                                    content: Image.network(image['url']),
+                                  ),
+                                ),
+                              );
+                            },
+                            transitionDuration: Duration(milliseconds: 200),
+                            barrierDismissible: true,
+                            barrierLabel: '',
+                            context: context,
+                            pageBuilder: (context, animation1, animation2) {
+                              return CircularProgressIndicator();
+                            });
+
+                        /*showDialog(
+                            barrierColor: Colors.black.withOpacity(0.5),
+                            context: context,
+                            builder: (_) => Dialog(
+                              child: Container(
+                                width: 200,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: NetworkImage((image['url'])),
+                                        fit: BoxFit.cover
+                                    )
+                                ),
+                              ),
+                            ),
+                        );*/
+                      },
                       /*    trailing: IconButton(
                                     onPressed: () => _delete(image['path']),
                                     icon: Icon(
@@ -84,6 +127,9 @@ class ItemDocumentList extends StatelessWidget {
     );
   }
 }
+
+
+
 
 
 
